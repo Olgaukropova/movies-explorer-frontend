@@ -1,0 +1,152 @@
+.aboutProject {
+  margin: 0 70px;
+}
+
+@media (max-width:1000px) {
+  .aboutProject {
+    margin: 0 50px;
+
+  }
+}
+
+.aboutProject__title {
+  margin: 0;
+  margin-top: 110px;
+  margin-bottom: 23px;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+}
+
+
+@media (max-width:1000px) {
+  .aboutProject__title {
+    margin-top: 90px;
+  }
+}
+
+.title {
+  border-bottom: 1px solid #DADADA;
+}
+
+.aboutProject__list {
+  margin: 0;
+  padding: 0;
+
+
+}
+
+.aboutProject__list {
+  display: grid;
+
+}
+
+.aboutProject__list_description {
+  margin-top: 70px;
+  grid-template-rows: repeat(2, max-content);
+  grid-template-columns: 1fr 1fr;
+  row-gap: 26px;
+  column-gap: 40px;
+  margin-bottom: 110px;
+}
+
+@media (max-width:1000px) {
+  .aboutProject__list_description {
+    row-gap: 26px;
+    column-gap: 30px;
+    margin-bottom: 93px;
+  }
+}
+
+.aboutProject__list_description-header {
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.8px;
+}
+
+.aboutProject__list_description-text {
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+@media (max-width:1000px) {
+  .aboutProject__list_description-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+.aboutProject__list_description-header {
+  margin: 0;
+}
+
+.aboutProject__list_description-text {
+  margin: 0;
+}
+
+.aboutProject__list_tasks-time {
+   margin: 0;
+  padding: 9px 14px;
+  background-color: #303030;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+}
+
+@media (max-width:1000px) {
+  .aboutProject__list_tasks-time {
+    padding: 9px 10px;
+  }
+}
+
+.aboutProject__list_tasks-time_type_One {
+  background-color: #3DDC84;
+}
+
+.aboutProject__list_tasks {
+  margin-top: 70px;
+  text-align: center;
+  grid-template-columns: 228px 1fr;
+  margin-bottom: 110px;
+  grid-template-rows: 36px 17px;
+  row-gap: 14px;
+}
+
+@media (max-width:1000px) {
+  .aboutProject__list_tasks {
+    grid-template-columns: 140px 1fr;
+    margin-bottom: 90px;
+  }
+}
+
+.aboutProject__list_tasks-step {
+  margin: 0;
+  padding: 0;
+  color: #8B8B8B;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+@media (max-width:1000px) {
+  .aboutProject__list_tasks-step {
+    font-weight: 400;
+  }
+}

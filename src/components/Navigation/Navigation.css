@@ -1,0 +1,25 @@
+.navigation{
+  display: flex;
+  }
+.navigation__movies{
+  color: #FFF;
+  text-align: right;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; 
+  text-decoration: none;
+}
+
+.navigation__saved{
+  color: #FFF;
+  text-align: right;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  text-decoration: none;
+  margin-left: 16px;
+}

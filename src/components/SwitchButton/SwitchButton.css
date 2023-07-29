@@ -1,0 +1,31 @@
+.button__text {
+  color: #FFF;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 0;
+}
+
+
+.button__block{
+  display: flex;
+  align-items: center;
+}
+
+
+.button__img {
+  width: 10px;
+  height: 10px;
+} 
+.button__icon {
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 6px;
+  background-color: #313131;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 13px;
+}

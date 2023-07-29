@@ -1,0 +1,9 @@
+.empty{
+  padding: 35px 0;
+}
+
+@media (max-width:1000px) {
+  .empty{
+    padding: 45px 0;
+  }
+}

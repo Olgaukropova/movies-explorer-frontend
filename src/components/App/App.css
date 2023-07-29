@@ -1,0 +1,35 @@
+.App {
+  .page {
+    box-sizing: border-box;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    max-width: 1280px;
+    /* min-width: 320px; */
+    font-family: 'Inter', 'Arial', sans-serif;
+    color: #ffffff;
+    margin: 0 auto;
+}
+  
+}
+
+/* @media (max-width:1000px) {
+  .App {
+    max-width: 581px;
+  }
+}
+
+@media (max-width:650px) {
+  .App {
+    max-width: 320px;
+  }
+}
+
+@media (max-width:340px) {
+  .App {
+    margin: 0;
+  }
+} */

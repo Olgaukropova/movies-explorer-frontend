@@ -1,0 +1,51 @@
+.filterCheckbox__text{
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+  .filterCheckbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+  
+  .filterCheckbox__input {
+    display: none;
+  }
+  
+  .filterCheckbox__label {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+    background-color: #202020;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 8px;
+    filter: url(#filter0_dd_41262_5709);
+  }
+  
+  .filterCheckbox__label:before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 16px;
+    height: 16px;
+    background-color: #3DDC84;
+    border-radius: 50%;
+    transition: right 0.2s ease-in-out;
+  }
+  
+  .filterCheckbox__input:checked + .filterCheckbox__label:before {
+    right: 18px;
+  }
+  
+  span {
+    margin-left: 10px;
+  }
