@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 function Error() {
   return (
     <section className='error'>
-      <p className='error__numder'>404</p>
-      <p className='error__text'>Страница не найдена</p>
-     <Link className='error__link'>Назад</Link>
-      
+      <div className='error__info'>
+        <p className='error__info_numder'>404</p>
+        <p className='error__info_text'>Страница не найдена</p>
+      </div>
+      <Link className='error__info_link'>Назад</Link>
+
     </section>
   )
 }

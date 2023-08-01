@@ -5,15 +5,39 @@
   margin-bottom: 40px;
 }
 
-.movie:last-of-type{
+@media (max-width:550px) {
+  .movie {
+    flex-direction: column-reverse;
+    margin-bottom: 20px;
+  }
+}
+
+.movie:last-of-type {
   margin-bottom: 0;
 }
 
-.movie__info{
+.movie__info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-left: 22px;
+}
+
+@media (max-width:550px) {
+  .movie__info {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 12px;
+    margin-right: 16px;
+    margin-top: 14px;
+  }
+}
+
+@media (max-width:550px) {
+  .movie__info-name {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
 }
 
 .movie__info-name {
@@ -45,15 +69,16 @@
   background-repeat: no-repeat;
   border: 0;
   background-color: #2F2F2F;
-}
+  }
 
-.buttonDelete{
+.buttonDelete {
   background-image: url(../../images/delete.svg);
   min-width: 14px;
   min-height: 12px;
   background-repeat: no-repeat;
   border: 0;
   background-color: #2F2F2F;
+  cursor: pointer;
 }
 
 .buttonHeartSaved:hover {
@@ -61,7 +86,7 @@
   opacity: 0.5;
 }
 
-.buttonHeartSaved_active{
+.buttonHeartSaved_active {
   background-image: url(../../images/heartRed.svg);
   min-width: 14px;
   min-height: 12px;
@@ -70,13 +95,18 @@
   background-color: #2F2F2F;
 }
 
-
-
-
-
-.movie__img{
+.movie__img {
   min-width: 220px;
   height: 122px;
   object-fit: cover;
   margin: 6px;
+  cursor: pointer;
+}
+
+@media (max-width:550px) {
+  .movie__img {
+    min-width: 300px;
+    height: 168px;
+    margin: 0px;
+  }
 }

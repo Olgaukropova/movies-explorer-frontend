@@ -18,7 +18,7 @@ function MoviesCardList() {
   const pathname = location.pathname;
 
   return (
-    <section className='list'>
+    <section className='movies'>
       <MoviesCard 
       name='33 слова о дизайне'
       time='1ч 42м'

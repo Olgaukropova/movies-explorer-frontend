@@ -1,10 +1,16 @@
-.list {
+.movies {
   padding: 70px 70px 80px 70px;
 }
 
 @media (max-width:1000px) {
-  .list {
+  .movies {
     padding: 60px 30px 80px 30px;
+  }
+}
+
+@media (max-width:550px) {
+  .movies {
+    padding: 50px 10px 80px 10px;
   }
 }
 
@@ -23,9 +29,17 @@
   font-weight: 500;
   line-height: normal;
   margin-top: 60px;
+  cursor: pointer;
 }
+
 @media (max-width:1000px) {
   .list__button {
     margin-top: 80px;
+  }
+}
+
+@media (max-width:550px) {
+  .list__button {
+    margin-top: 70px;
   }
 }

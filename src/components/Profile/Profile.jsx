@@ -5,12 +5,7 @@ import Header from '../Header/Header';
 function Profile() {
   return (
     <>
-      <Header
-        text_register='Регистрация'
-        text_login="Войти"
-        pass='/signin'
-        text_profile=''
-      />
+      <Header />
 
       <div className="profile__container">
        

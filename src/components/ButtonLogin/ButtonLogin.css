@@ -1,7 +1,7 @@
 .links {
   display: flex;
   align-items: center;
-  }
+}
 
 .link {
   color: #FFF;
@@ -13,6 +13,14 @@
   line-height: 16px;
   text-decoration: none;
   margin-right: 30px;
+  cursor: pointer;
+}
+
+@media (max-width:550px) {
+  .link {
+    font-size: 10px;
+    margin-right: 14px;
+  }
 }
 
 .link__button-login {
@@ -27,4 +35,14 @@
   min-width: 76px;
   min-height: 32px;
   border-radius: 3px;
+  cursor: pointer;
+}
+
+
+@media (max-width:550px) {
+  .link__button-login {
+    min-width: 54px;
+    min-height: 26px;
+    font-size: 10px;
+  }
 }

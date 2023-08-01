@@ -6,19 +6,16 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 
+
 function SavedMovies() {
-  return(
+  return (
     <>
-     <Header
-        text_register='Регистрация'
-        text_login="Войти"
-        pass='/signin'
-        text_profile=''
-      />
+      <Header />
       <SearchForm />
       <MoviesCardList />
       <div className='empty'></div>
       <Footer />
+
     </>
   )
 

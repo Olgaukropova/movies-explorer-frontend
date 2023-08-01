@@ -7,6 +7,12 @@
   }
 }
 
+@media (max-width:550px) {
+  .portfolio {
+    padding: 0 14px 70px 14px;
+  }
+}
+
 .portfolio__title{
   margin: 0;
   margin-bottom: 50px;
@@ -17,6 +23,13 @@
   font-style: normal;
   font-weight: 400;
   line-height: 20px; 
+}
+
+@media (max-width:550px) {
+  .portfolio__title{
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
 }
 
 .portfolio__links{
@@ -60,3 +73,12 @@
   }
 }
 
+
+@media (max-width:550px) {
+  .portfolio__link-element{
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    background-size: 27px 60px;
+    background-size: 18px 28px;
+  }
+}

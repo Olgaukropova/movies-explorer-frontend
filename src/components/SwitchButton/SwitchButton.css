@@ -1,3 +1,9 @@
+@media (max-width:800px) {
+  .button {
+    display: none;
+  }
+}
+
 .button__text {
   color: #FFF;
   font-family: Inter;
@@ -9,7 +15,7 @@
 }
 
 
-.button__block{
+.button__block {
   display: flex;
   align-items: center;
 }
@@ -18,7 +24,8 @@
 .button__img {
   width: 10px;
   height: 10px;
-} 
+}
+
 .button__icon {
   min-width: 30px;
   min-height: 30px;

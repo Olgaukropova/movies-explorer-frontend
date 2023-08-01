@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import SwitchButton from '../SwitchButton/SwitchButton';
 import ButtonLogin from '../ButtonLogin/ButtonLogin';
-
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 function Header() {
   const location = useLocation();
@@ -19,13 +19,15 @@ function Header() {
       {(pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') ? (
         <>
           <Navigation />
-          <SwitchButton />          
+          <SwitchButton /> 
+          <BurgerMenu/>         
         </>
       ) : (
         <>          
           <ButtonLogin />
         </>
       )}
+      
           </header>
   );
 }

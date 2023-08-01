@@ -9,7 +9,7 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Error from '../Error/Error';
-
+// import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 
 
@@ -26,6 +26,7 @@ function App() {
         <Route path="/signup" element={<Register/>}/>
         <Route path="/signin" element={<Login/>}/>
         <Route path="/error" element={<Error/>}/>
+        {/* <Route path="/menu" element={<BurgerMenu/>}/> */}
 
       </Routes>
     </div>
