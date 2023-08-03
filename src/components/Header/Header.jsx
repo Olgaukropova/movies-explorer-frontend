@@ -19,16 +19,15 @@ function Header() {
       {(pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') ? (
         <>
           <Navigation />
-          <SwitchButton /> 
-          <BurgerMenu/>         
+          <SwitchButton />
+          <BurgerMenu />
         </>
       ) : (
-        <>          
+        <>
           <ButtonLogin />
         </>
       )}
-      
-          </header>
+    </header>
   );
 }
 

@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 
 
 function MoviesCard({ name, time, film }) {
-
   const location = useLocation();
   const pathname = location.pathname;
 
@@ -20,14 +19,10 @@ function MoviesCard({ name, time, film }) {
         ) : (
           <button className='buttonDelete' type="button" ></button>
         )}
-
       </div>
-
       <img className='movie__img' src={film} alt="заставка" />
-
     </section>
   )
-
 };
 
 export default MoviesCard;

@@ -9,10 +9,6 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Error from '../Error/Error';
-// import BurgerMenu from '../BurgerMenu/BurgerMenu';
-
-
-
 
 function App() {
   return (
@@ -21,13 +17,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={<Movies />} />
-        <Route path="/saved-movies" element={<SavedMovies/>}/>
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/signup" element={<Register/>}/>
-        <Route path="/signin" element={<Login/>}/>
-        <Route path="/error" element={<Error/>}/>
-        {/* <Route path="/menu" element={<BurgerMenu/>}/> */}
-
+        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/error" element={<Error />} />
       </Routes>
     </div>
     // </CurrentUserContext.Provider>

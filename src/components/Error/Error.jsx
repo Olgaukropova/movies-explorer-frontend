@@ -10,7 +10,6 @@ function Error() {
         <p className='error__info_text'>Страница не найдена</p>
       </div>
       <Link className='error__info_link'>Назад</Link>
-
     </section>
   )
 }

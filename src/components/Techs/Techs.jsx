@@ -22,7 +22,6 @@ function Techs() {
       </ul>
     </section>
   )
-
 };
 
 export default Techs;

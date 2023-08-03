@@ -23,7 +23,7 @@
 @media (max-width:550px) {
   .techs {
     background-color: #202020;
-    padding: 70px 14px;
+    padding: 72px 18px;
   }
 }
 
@@ -31,7 +31,7 @@
   margin: 0;
   padding: 0;
   color: #FFF;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 22px;
   font-style: normal;
   font-weight: 400;
@@ -44,7 +44,7 @@
   .techs__title {
     font-size: 18px;
     letter-spacing: -0.72px;
-    margin-bottom: 23px;
+    margin-bottom: 28px;
   }
 }
 
@@ -53,7 +53,7 @@
   padding: 0;
   color: #FFF;
   text-align: center;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -72,18 +72,17 @@
 
 @media (max-width:550px) {
   .techs__header {
-    margin-top: 60px;
+    margin-top: 49px;
     font-size: 30px;
     letter-spacing: -1.2px;
   }
 }
 
-
 .techs__subtitle {
   margin: 0 auto;
   color: #FFF;
   text-align: center;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -100,7 +99,7 @@
     line-height: 18px;
     letter-spacing: -0.48px;
     margin-top: 22px;
-    margin-bottom: 83px;
+    margin-bottom: 84px;
   }
 }
 
@@ -109,7 +108,7 @@
     font-size: 11px;
     line-height: 16px;
     letter-spacing: -0.44px;
-    margin-top: 24px;
+    margin-top: 13px;
     margin-bottom: 50px;
 }
 }
@@ -143,7 +142,7 @@
   list-style: none;
   color: #FFF;
   text-align: center;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

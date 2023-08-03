@@ -1,22 +1,21 @@
 .promo {
-  margin: 20px 40px 0 40px;
+  margin: 33px 40px 0 40px;
   background-color: #272727;
-  min-height: 493px;
   border-radius: 10px;
   padding-top: 160px;
 }
 
 @media (max-width:1000px) {
   .promo {
-    padding-top: 350px;
+    padding-top: 352px;
+    margin: 33px 20px 0 20px;
   }
 }
 
-
 @media (max-width:550px) {
   .promo {
-    margin: 32px 14px 0 14px;
-    padding-top: 220px;
+    margin: 30px 14px 0 14px;
+    padding-top: 219px;
     min-height: 366px;
   }
 }
@@ -24,7 +23,7 @@
 .promo__header {
   color: #FFF;
   text-align: center;
-  /* font-family: Inter; */
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -33,8 +32,6 @@
   max-width: 730px;
   margin: 0 auto;
 }
-
-
 
 @media (max-width:1000px) {
   .promo__header {
@@ -59,11 +56,12 @@
 .promo__navigation {
   margin-top: 151px;
   text-align: center;
+  padding-bottom: 30px;
 }
 
 @media (max-width:1000px) {
   .promo__navigation {
-    margin-top: 314px;
+    margin-top: 315px;
 
   }
 }
@@ -71,6 +69,7 @@
 @media (max-width:550px) {
   .promo__navigation {
     margin-top: 212px;
+    padding-bottom: 17px;
   }
 }
 
@@ -89,7 +88,7 @@
 .promo__navigation_button {
   border: 0;
   color: #FFF;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -97,14 +96,17 @@
   background-color: #303030;
   min-height: 36px;
   border-radius: 10px;
-  padding: 10px 23px;
+  min-width: 96px;
   cursor: pointer;
+
 }
 
 @media (max-width:550px) {
   .promo__navigation_button {
     font-size: 10px;
     line-height: 16px;
-    padding: 5px 15px;
+    min-width: 82px;
+    min-height: 26px;
+    border-radius: 6px;
   }
 }

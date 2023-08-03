@@ -6,7 +6,7 @@
 
 .button__text {
   color: #FFF;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -35,4 +35,30 @@
   justify-content: center;
   align-items: center;
   margin-left: 13px;
+}
+
+.button-lines {
+  display: none;
+}
+
+@media (max-width:800px) {
+  .button-lines {
+    display: block;
+    margin: 0;
+    border: 0;
+    padding: 5px;
+    background-color: #202020;
+    min-width: 44px;
+    height: 44px;
+    background-image: url(../../images/lines.svg);
+    background-size: 44px 44px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+@media (max-width:550px) {
+  .button-lines {
+    background-size: 36px 53px;
+  }
 }

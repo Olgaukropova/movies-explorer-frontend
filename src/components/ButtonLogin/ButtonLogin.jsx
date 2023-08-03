@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 function ButtonLogin() {
   return (
-
     <section className='links'>
       <Link to='/signup' className='link'>Регистрация</Link>
       <Link to='/signin' className='link__button'>
@@ -13,7 +12,6 @@ function ButtonLogin() {
       </Link>
     </section>
   )
-
 };
 
 export default ButtonLogin;

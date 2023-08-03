@@ -2,7 +2,6 @@
   border-bottom: 1px solid #DADADA;
 }
 
-
 .aboutMe {
   padding: 110px 70px 100px 70px;
 }
@@ -21,7 +20,7 @@
 
 .aboutMe__title {
   color: #FFF;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 22px;
   font-style: normal;
   font-weight: 400;
@@ -35,7 +34,8 @@
 @media (max-width:550px) {
   .aboutMe__title {
     letter-spacing: -0.72px;
-    margin-bottom: 28px;
+    margin-bottom: 26px;
+    font-size: 18px;
   }
 }
 
@@ -50,6 +50,7 @@
   .aboutMe__content {
     flex-direction: column;
     align-items: center;
+    margin-top: 60px;
   }
 }
 
@@ -88,7 +89,7 @@
 .aboutMe__info-name {
   margin: 0;
   color: #FFF;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -114,8 +115,7 @@
 
 .aboutMe__info-job {
   color: #FFF;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -134,7 +134,7 @@
   }
 }
 
-@media (max-width:1000px) {
+@media (max-width:550px) {
   .aboutMe__info-job {
     margin-top: 20px;
     font-size: 11px;
@@ -144,21 +144,20 @@
 
 .aboutMe__info-text {
   color: #FFF;
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
   margin: 0;
   margin-bottom: 99px;
+  font-family: 'Inter', 'Arial', sans-serif;
 }
 
 @media (max-width:1000px) {
   .aboutMe__info-text {
     font-size: 12px;
     line-height: 18px;
-    margin-bottom: 87px;
+    margin-bottom: 105px;
   }
 }
 
@@ -166,15 +165,15 @@
   .aboutMe__info-text {
     font-size: 11px;
     line-height: 16px;
-    margin-bottom: 40px;
+    margin-bottom: 56px;
   }
 }
 
 .aboutMe__info-link {
   margin-top: 99px;
   text-decoration: none;
+  font-family: 'Inter', 'Arial', sans-serif;
   color: #FFF;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

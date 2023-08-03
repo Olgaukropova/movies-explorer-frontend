@@ -11,19 +11,18 @@ function Login() {
       <Link to="/" className='login__link' >
         <img src={logo} classNamealt="login__logo" alt='лготип' />
       </Link>
-
       <form className="form" action="">
         <h2 className="form__header">Рады видеть!</h2>
         <li className="form__item">
           <label for="email">E-mail</label>
-          <input className="form__input" type="email" placeholder="pochta@yandex.ru" name="email" />
+          <input className="form__input" type="email" placeholder="pochta@yandex.ru" name="email" required />
         </li>
         <li className="form__item">
           <label for="password">Пароль</label>
-          <input className="form__input" type="password" placeholder="пароль" minLength="3" maxLength="14" name="password" />
+          <input className="form__input" type="password" placeholder="" minLength="3" maxLength="14" name="password" required />
         </li>
         <button className="form__button">Войти</button>
-        <p className="form__text">Уже зарегистрированы? <Link className='form__text_link' to='/signup'>Регистрация</Link> </p>
+        <p className="form__text">Ещё не зарегистрированы?<Link className='form__text_link' to='/signup'>Регистрация</Link> </p>
       </form >
     </section>
   )

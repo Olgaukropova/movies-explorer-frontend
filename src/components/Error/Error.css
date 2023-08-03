@@ -6,11 +6,11 @@
 
 @media (max-width:1000px) {
   .error {
-    margin-top: 246px;
+    margin-top: 409px;
   }
 }
 
-@media (max-width:1000px) {
+@media (max-width:550px) {
   .error {
     margin-top: 329px;
   }

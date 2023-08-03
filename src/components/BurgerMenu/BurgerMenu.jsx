@@ -6,8 +6,7 @@ import icon from '../../images/user-user.svg';
 function BurgerMenu() {
   return (
     <section className='menu'>
-      <button className='menu__button-lines'></button>
-      <nav className='menu__nav'>
+           <nav className='menu__nav'>
       <button className='menu__button-delete'></button>
         <ul className='menu__list'>
           <li className='menu__list_main'>Главная</li>

@@ -8,27 +8,23 @@ function Profile() {
       <Header />
 
       <div className="profile__container">
-       
         <h2 className="profile__title">Привет, Виталий!</h2>
         <form className='profile__form'>
-        <div className='profile__info'>
-          <input className='profile__info-input' type="text" placeholder='Имя'/>
-          <p className='profile__info-value'>Виталий</p>
-        </div>
-        <div className='profile__line'></div>
-
-        <div className='profile__info'>
-         <input className='profile__info-input' type="text" placeholder='E-mail'/>
-          <p className='profile__info-value'>pochta@yandex.ru</p>
-        </div>
-        <div className='profile__button'>
-        <button className="profile__button-submit profile__button-edit" type="submit" >Редактировать</button>
-        <button className="profile__button-submit profile__button-logout" type="submit" >Выйти из аккаунта</button>
-        </div>
+          <div className='profile__info'>
+            <input className='profile__info-input' type="text" placeholder='Имя' required />
+            <p className='profile__info-value'>Виталий</p>
+          </div>
+          <div className='profile__line'></div>
+          <div className='profile__info'>
+            <input className='profile__info-input' type="text" placeholder='E-mail' required />
+            <p className='profile__info-value'>pochta@yandex.ru</p>
+          </div>
+          <div className='profile__button'>
+            <button className="profile__button-submit profile__button-edit" type="submit" >Редактировать</button>
+            <button className="profile__button-submit profile__button-logout" type="submit" >Выйти из аккаунта</button>
+          </div>
         </form>
-
       </div>
-
     </>
   )
 };
