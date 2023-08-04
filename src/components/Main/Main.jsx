@@ -11,20 +11,15 @@ import Footer from '../Footer/Footer';
 
 function Main() {
   return (
-    <>
-    <Header
-          text_register='Регистрация'
-          text_login = "Войти"
-          pass = '/signin'
-          text_profile =''
-          />
+    <main>
+      <Header />
       <Promo />
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
-      <Footer/>
-    </>
+      <Footer />
+    </main>
   )
 };
 

@@ -4,7 +4,6 @@ import "./Techs.css";
 
 function Techs() {
   return (
-
     <section className="techs" id='tech'>
       <div className="techs__botom">
         <h2 className="techs__title">Технологии</h2>

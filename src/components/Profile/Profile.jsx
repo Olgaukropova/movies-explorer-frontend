@@ -7,7 +7,7 @@ function Profile() {
     <>
       <Header />
 
-      <div className="profile__container">
+      <section className="profile__container">
         <h2 className="profile__title">Привет, Виталий!</h2>
         <form className='profile__form'>
           <div className='profile__info'>
@@ -23,8 +23,13 @@ function Profile() {
             <button className="profile__button-submit profile__button-edit" type="submit" >Редактировать</button>
             <button className="profile__button-submit profile__button-logout" type="submit" >Выйти из аккаунта</button>
           </div>
+          <button className="profile__button-saved" type="submit" >Сохранить</button>
+          <div className='profile__button-error'>
+            <p className='profile__button-error_text'>При обновлении профиля произошла ошибка.</p>
+            <button className="profile__button-error_saved" type="submit" >Сохранить</button>
+          </div>
         </form>
-      </div>
+      </section>
     </>
   )
 };
