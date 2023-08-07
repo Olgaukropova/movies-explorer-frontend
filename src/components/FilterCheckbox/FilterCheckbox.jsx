@@ -3,10 +3,10 @@ import "./FilterCheckbox.css";
 
 function FilterCheckbox() {
   return (
-    <section className="filterCheckbox">
-      <input type="checkbox" id="toggle" className="filterCheckbox__input" />
-      <label for="toggle" className="filterCheckbox__label"></label>
-      <span className="filterCheckbox__text">Короткометражки</span>
+    <section className="filtercheckbox">
+      <input type="checkbox" id="toggle" className="filtercheckbox__input" />
+      <label htmlFor="toggle" className="filtercheckbox__label"></label>
+      <span className="filtercheckbox__text">Короткометражки</span>
     </section>
   )
 };

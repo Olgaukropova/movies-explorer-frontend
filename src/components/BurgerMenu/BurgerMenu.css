@@ -100,8 +100,25 @@
 }
 
 @media (max-width:800px) {
-  .menu__list_mov {
+.menu__list_main-link{
+  text-decoration: none;
+  color: #FFF;
+  text-align: center;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+}
+}
 
+.menu__list_main-link:hover{
+  opacity: 0.7;
+}
+
+@media (max-width:800px) {
+  .menu__list_mov {
     color: #FFF;
     text-align: center;
     font-family: 'Inter', 'Arial', sans-serif;
@@ -125,13 +142,17 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-top: 621px;
+    margin-top: 594px;
   }
+}
+
+.menu__list_page:hover {
+  opacity: 0.7;
 }
 
 @media (max-width:550px) {
   .menu__list_page {
-    margin-top: 444px;
+    margin-top: 421px;
   }
 }
 
@@ -148,6 +169,10 @@
     line-height: normal;
     padding-bottom: 4px;
   }
+}
+
+.menu__list_mov_movies:hover{
+opacity: 0.7;
 }
 
 @media (max-width:800px) {
@@ -192,6 +217,11 @@
   }
 }
 
+
+.menu__list_mov__saved:hover{
+  opacity: 0.7;
+  }
+  
 @media (max-width:800px) {
   .menu__list_mov__saved_active {
     border-bottom: 2px solid #FFF;
@@ -205,5 +235,7 @@
     text-decoration: none;
   }
 }
-
-
+.burger_opened{
+  display: flex;
+  opacity: 1;
+}

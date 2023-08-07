@@ -3,7 +3,7 @@ import "./SwitchButton.css";
 import icon from '../../images/user-user.svg'
 import { Link } from 'react-router-dom';
 
-function SwitchButton() {
+function SwitchButton({onBurgerMenu}) {
   return (
     <>
       <div className='button'>
@@ -14,7 +14,7 @@ function SwitchButton() {
           </div>
         </Link>
       </div>
-      <button className='button-lines'></button>
+      <button className='button-lines' type='button' onClick={onBurgerMenu} ></button>
     </>
   )
 };

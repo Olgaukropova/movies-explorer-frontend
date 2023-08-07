@@ -9,9 +9,11 @@ function SavedMovies() {
   return (
     <>
       <Header />
-      <SearchForm />
-      <MoviesCardList />
-      <div className='empty'></div>
+      <main>
+        <SearchForm />
+        <MoviesCardList />
+        <div className='empty'></div>
+      </main>
       <Footer />
     </>
   )

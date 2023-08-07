@@ -6,17 +6,17 @@ function Portfolio() {
   return(
     <section className="portfolio">
         <h3  className="portfolio__title">Портфолио</h3>
-        <div className="portfolio__links">
-          <div className="portfolio__link">
-            <a href="https://github.com/Olgaukropova/how-to-learn" className='portfolio__link-element'>Статичный сайт</a>
-          </div>
-          <div className="portfolio__link">
-            <a className='portfolio__link-element' href="https://github.com/Olgaukropova/russian-travel">Адаптивный сайт</a>
-          </div>
-          <div className="portfolio__link">
-            <a className='portfolio__link-element' href="https://mesto.olga.nomoreparties.sbs">Одностраничное приложение</a>
-          </div>
-        </div>
+        <ul className="portfolio__links">
+          <li className="portfolio__link">
+            <a href="https://github.com/Olgaukropova/how-to-learn" className='portfolio__link-element' target="_blank" rel="noreferrer">Статичный сайт</a>
+          </li>
+          <li className="portfolio__link">
+            <a className='portfolio__link-element' href="https://github.com/Olgaukropova/russian-travel" target="_blank" rel="noreferrer">Адаптивный сайт</a>
+          </li>
+          <li className="portfolio__link">
+            <a className='portfolio__link-element' href="https://github.com/Olgaukropova/react-mesto-api-full-gha" target="_blank" rel="noreferrer">Одностраничное приложение</a>
+          </li>
+        </ul>
       </section>
   )
 };

@@ -20,7 +20,7 @@ function MoviesCard({ name, time, film }) {
           <button className='buttonDelete' type="button" ></button>
         )}
       </div>
-      <img className='movie__img' src={film} alt="заставка" />
+      <img className='movie__img' src={film} alt={`заставка: ${name}`} />
     </section>
   )
 };

@@ -10,7 +10,7 @@
 
 @media (max-width:550px) {
   .portfolio {
-    padding: 0 14px 70px 14px;
+    padding: 0 14px 61px 14px;
   }
 }
 
@@ -18,7 +18,7 @@
   margin: 0;
   margin-bottom: 50px;
   color: #8B8B8B;
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -43,6 +43,7 @@
   border-bottom: 1px solid #424242;
   padding-bottom: 19px;
   margin-bottom: 20px;
+  list-style: none;
 }
 
 @media (max-width:1000px) {

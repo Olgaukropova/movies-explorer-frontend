@@ -8,7 +8,7 @@ function ButtonLogin() {
     <section className='links'>
       <Link to='/signup' className='link'>Регистрация</Link>
       <Link to='/signin' className='link__button'>
-        <button className='link__button-login'>Войти</button>
+        <button className='link__button-login' type='button'>Войти</button>
       </Link>
     </section>
   )

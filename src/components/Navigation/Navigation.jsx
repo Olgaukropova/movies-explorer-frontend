@@ -1,15 +1,30 @@
 import React from 'react';
 import "./Navigation.css";
-
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Navigation() {
+
+  const isActive = (match) => {
+        if (match.isActive) {
+      return "navigation__movies active navigation__movies_active";
+    } else {
+      return "navigation__movies";
+    }
+  };
+
+  
   return (
     <section className='navigation'>
-      <Link className='navigation__movies' to="/movies">Фильмы</Link>
-      <Link className='navigation__saved' to="/saved-movies">Сохранённые фильмы</Link>
+      <nav>
+        <NavLink
+          className={isActive} to="/movies"
+        >Фильмы</NavLink>
+        <NavLink className={isActive} to="/saved-movies"
+        >Сохранённые фильмы</NavLink>
+      </nav>
     </section>
   )
 };
 
 export default Navigation;
+

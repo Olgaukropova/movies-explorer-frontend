@@ -78,6 +78,11 @@
   background-color: #2F2F2F;
 }
 
+.buttonHeartSaved:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 .buttonDelete {
   background-image: url(../../images/delete.svg);
   min-width: 14px;
@@ -88,9 +93,8 @@
   cursor: pointer;
 }
 
-.buttonHeartSaved:hover {
-  cursor: pointer;
-  opacity: 0.5;
+.buttonDelete:hover {
+  opacity: 0.7;
 }
 
 .buttonHeartSaved_active {

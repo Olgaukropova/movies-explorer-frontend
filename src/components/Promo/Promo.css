@@ -54,9 +54,12 @@
 }
 
 .promo__navigation {
+  display: flex;
+  justify-content: center;
   margin-top: 151px;
   text-align: center;
   padding-bottom: 30px;
+  padding-left: 0;
 }
 
 @media (max-width:1000px) {
@@ -71,6 +74,10 @@
     margin-top: 212px;
     padding-bottom: 17px;
   }
+}
+
+.promo__navigation_item {
+  list-style: none;
 }
 
 .promo__techs {

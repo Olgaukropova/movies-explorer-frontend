@@ -1,26 +1,37 @@
 import React from 'react';
 import "./BurgerMenu.css";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import icon from '../../images/user-user.svg';
 
-function BurgerMenu() {
+function BurgerMenu({isOpen, onClose}) {
+
+  const isActive = (match) => {
+    if (match.isActive) {
+  return "menu__list_mov_movies active menu__list_mov_movies_active";
+} else {
+  return "menu__list_mov_movies";
+}
+};
+
   return (
-    <section className='menu'>
-           <nav className='menu__nav'>
-      <button className='menu__button-delete'></button>
+    <section className={`menu ${isOpen ? 'burger_opened' : ''}`}>
+      <nav className='menu__nav'>
+        <button className='menu__button-delete' type='button' onClick={onClose}></button>
         <ul className='menu__list'>
-          <li className='menu__list_main'>Главная</li>
+          <li className='menu__list_main'>
+            <NavLink className='menu__list_main-link' to='/'>Главная</NavLink>
+            </li>
           <li className='menu__list_mov'>
-            <Link className='menu__list_mov_movies' to="/movies">Фильмы</Link>
-            <Link className='menu__list_mov__saved' to="/saved-movies">Сохранённые фильмы</Link>
+            <NavLink className={isActive} to="/movies">Фильмы</NavLink>
+            <NavLink className={isActive} to="/saved-movies">Сохранённые фильмы</NavLink>
           </li>
           <li className='menu__list_page'>
-            <Link className='button__block' to='/profile'>
+            <NavLink className='button__block' to='/profile'>
               <p className='button__text'>Аккаунт</p>
               <div className='button__icon'>
                 <img className='button__img' src={icon} alt="иконка юзер" />
               </div>
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>

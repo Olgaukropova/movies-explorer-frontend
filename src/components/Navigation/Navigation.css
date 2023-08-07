@@ -1,6 +1,7 @@
 .navigation {
   display: flex;
   margin-left: 64px;
+  margin-bottom: 7px;
 }
 
 @media (max-width:800px) {
@@ -18,13 +19,22 @@
   font-weight: 400;
   line-height: 18px;
   text-decoration: none;
+  margin-left: 16px;
+}
+
+.navigation__movies:first-child{
+  margin-left:0;
+}
+
+.navigation__movies:hover{
+  opacity: 0.7;
 }
 
 .navigation__movies_active {
-  color: #FFF;
+  color:  #FFF;
   text-align: right;
   font-family: 'Inter', 'Arial', sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
@@ -36,9 +46,9 @@
   color: #FFF;
   text-align: right;
   font-family: 'Inter', 'Arial', sans-serif;
-  font-size: 13px;
+  font-size: 18px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 18px;
   text-decoration: none;
   margin-left: 16px;
@@ -50,8 +60,12 @@
   font-family: 'Inter', 'Arial', sans-serif;
   font-size: 13px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 18px;
   text-decoration: none;
   margin-left: 16px;
+}
+
+.navigation__saved:hover{
+  opacity: 0.7;
 }

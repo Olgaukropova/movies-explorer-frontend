@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.link:hover {
+  opacity: 0.7;
+}
+
 @media (max-width:550px) {
   .link {
     font-size: 10px;
@@ -36,6 +40,10 @@
   min-height: 32px;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.link__button-login:hover {
+  opacity: 0.7;
 }
 
 @media (max-width:550px) {
