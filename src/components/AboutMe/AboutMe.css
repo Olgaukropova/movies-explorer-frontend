@@ -1,0 +1,181 @@
+.title {
+  border-bottom: 1px solid #DADADA;
+}
+
+.aboutme {
+  padding: 110px 70px 100px 70px;
+}
+
+@media (max-width:1000px) {
+  .aboutme {
+    padding: 90px 50px;
+  }
+}
+
+@media (max-width:550px) {
+  .aboutme {
+    padding: 70px 14px;
+  }
+}
+
+.aboutme__title {
+  color: #FFF;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  margin: 0;
+  margin-bottom: 23px;
+}
+
+
+@media (max-width:550px) {
+  .aboutme__title {
+    letter-spacing: -0.72px;
+    margin-bottom: 26px;
+    font-size: 18px;
+  }
+}
+
+.aboutme__content {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 66px;
+  justify-content: space-between;
+}
+
+@media (max-width:550px) {
+  .aboutme__content {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+  }
+}
+
+.aboutme__avatar {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+@media (max-width:1000px) {
+  .aboutme__avatar {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media (max-width:550px) {
+  .aboutme__avatar {
+    min-width: 292px;
+    min-height: 352px;
+    margin-bottom: 40px;
+  }
+}
+
+.aboutme__info {
+  max-width: 600px;
+}
+
+@media (max-width:1000px) {
+  .aboutme__info {
+    max-width: 364px;
+  }
+}
+
+.aboutme__info-name {
+  margin: 0;
+  color: #FFF;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px;
+  letter-spacing: -2px;
+}
+
+@media (max-width:1000px) {
+  .aboutme__info-name {
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: -1.6px;
+  }
+}
+
+@media (max-width:550px) {
+  .aboutme__info-name {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+  }
+}
+
+.aboutme__info-job {
+  color: #FFF;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin-top: 18px;
+  margin-bottom: 26px;
+}
+
+@media (max-width:1000px) {
+  .aboutme__info-job {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width:550px) {
+  .aboutme__info-job {
+    margin-top: 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+.aboutme__info-text {
+  color: #FFF;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+  margin-bottom: 99px;
+  font-family: 'Inter', 'Arial', sans-serif;
+}
+
+@media (max-width:1000px) {
+  .aboutme__info-text {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 105px;
+  }
+}
+
+@media (max-width:550px) {
+  .aboutme__info-text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 56px;
+  }
+}
+
+.aboutme__info-link {
+  margin-top: 99px;
+  text-decoration: none;
+  font-family: 'Inter', 'Arial', sans-serif;
+  color: #FFF;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
