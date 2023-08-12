@@ -11,6 +11,8 @@
     font-family: 'Inter', 'Arial', sans-serif;
     color: #ffffff;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
 }
   
 }

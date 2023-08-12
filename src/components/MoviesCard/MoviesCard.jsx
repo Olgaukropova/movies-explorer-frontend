@@ -3,7 +3,7 @@ import "./MoviesCard.css";
 import { useLocation } from 'react-router-dom';
 
 
-function MoviesCard({ name, time, film }) {
+function MoviesCard({ movie }) {
   const location = useLocation();
   const pathname = location.pathname;
 
@@ -11,8 +11,8 @@ function MoviesCard({ name, time, film }) {
     <section className='movie'>
       <div className='movie__info'>
         <div>
-          <h2 className='movie__info-name'>{name}</h2>
-          <p className='movie__info-time'>{time}</p>
+          <h2 className='movie__info-name'>{movie.nameRU}</h2>
+          <p className='movie__info-time'>{movie.duration}</p>
         </div>
         {(pathname === '/movies') ? (
           <button className='buttonHeartSaved' type="button" ></button>
@@ -20,7 +20,9 @@ function MoviesCard({ name, time, film }) {
           <button className='buttonDelete' type="button" ></button>
         )}
       </div>
-      <img className='movie__img' src={film} alt={`заставка: ${name}`} />
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+        <img className='movie__img' src={`https://api.nomoreparties.co/${movie.image.url}`} alt={`заставка: ${movie.nameRU}`} />
+      </a>
     </section>
   )
 };

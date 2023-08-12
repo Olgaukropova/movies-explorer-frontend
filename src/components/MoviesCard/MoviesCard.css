@@ -107,7 +107,7 @@
 }
 
 .movie__img {
-  min-width: 220px;
+  width: 220px;
   height: 122px;
   object-fit: cover;
   margin: 6px;
