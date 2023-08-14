@@ -7,12 +7,20 @@ function MoviesCard({ movie }) {
   const location = useLocation();
   const pathname = location.pathname;
 
+  function formatDuration(duration) {
+    const hours = Math.floor(duration / 60);
+    const minutes = duration % 60;
+    
+    return `${hours}ч ${minutes}мин`;
+  }
+  
+
   return (
     <section className='movie'>
       <div className='movie__info'>
         <div>
           <h2 className='movie__info-name'>{movie.nameRU}</h2>
-          <p className='movie__info-time'>{movie.duration}</p>
+          <p className='movie__info-time'>{formatDuration(movie.duration)}</p>
         </div>
         {(pathname === '/movies') ? (
           <button className='buttonHeartSaved' type="button" ></button>

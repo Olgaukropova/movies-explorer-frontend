@@ -1,4 +1,4 @@
-.filtercheckbox__text {
+/* .filtercheckbox__text {
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
@@ -84,4 +84,4 @@
 .filtercheckbox__input:not(:checked)+.filtercheckbox__label:before {
   right: 2px;
   background-color: #3DDC84;
-}
+} */

@@ -6,11 +6,13 @@ import "./App.css";
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import './App.css';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Error from '../Error/Error';
 import { api } from '../../utils/MoviesApi';
+
 
 
 function App() {
@@ -34,7 +36,9 @@ function App() {
         <Route path="/movies" element={<Movies
           movies={movies}
           isLoading={isLoading} />} />
-        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route path="/saved-movies" element={<SavedMovies
+          movies={movies}
+          isLoading={isLoading} />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
