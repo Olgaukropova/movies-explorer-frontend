@@ -11,7 +11,7 @@ class MainApi {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  register  (name, email, password) {
+  register(name, email, password) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: {
@@ -21,65 +21,97 @@ class MainApi {
         name,
         email,
         password
-      })
-    })
-    .then(this._checkResponse);
-  
-  };
-
-  
- authorize = (email, password) => {
-  return fetch(`${this._baseUrl}/signin`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-
-    },
-    body: JSON.stringify({
-      email,
-      password
-    })
-  })
-    .then(this._checkResponse)
-};
-
-  getSavedMovies() {
-    return fetch(`${this._baseUrl}/movies`, {
-      method: 'GET',
-            headers: this._headers,
-      'Content-Type': 'application/json'
+      }),
+      credentials: 'include'
     })
       .then(this._checkResponse);
 
-  }
+  };
+
+
+  authorize = (email, password) => {
+
+    const token = localStorage.getItem('jwt');
+
+    return fetch(`${this._baseUrl}/signin`, {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ${token}`,
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        email,
+        password,
+        // token
+      })
+    })
+      .then(this._checkResponse)
+  };
+
+  //запрос данных о пользователе с сервера
+  getInfoUser(token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        "Accept": "application/json",
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      credentials: 'include'
+    })
+      .then(this._checkResponse);
+
+  };
+
+  getSavedMovies(token) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'GET',
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: 'include'
+    })
+      .then(this._checkResponse);
+
+  };
+
+
 
   savedMovies(data) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: this._headers,
-      'Content-Type': 'application/json'
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${data.token}`,
+      },
+      credentials: 'include'
     })
       .then(this._checkResponse);
   }
 
   //Попап удаления карточки
-  deleteMovies(movieId) {
+  deleteMovies(movieId, token) {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: {
+        ...this._headers,
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: 'include'
     })
       .then(this._checkResponse);
   }
-
-
-
 }
+
+
 
 export const mainApi = new MainApi({
   baseUrl: 'https://api.olga.diploma.nomoredomains.xyz',
   headers: {
-    'Accept': 'application/json',
     'Content-Type': 'application/json'
   },
 });
