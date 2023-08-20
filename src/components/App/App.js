@@ -21,39 +21,21 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState(null);
+  const [currentUser, setCurrentUser] = React.useState({});
+ 
 
   const navigate = useNavigate();
-
-  //Функция для получения значения куки по имени
-  function getCookie(name) {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim().split('=');
-      if (cookie[0] === name) {
-        return cookie[1];
-      }
-    }
-    return null;
-  }
 
   const handleLogin = ({ email, password }) => {
     mainApi
       .authorize(email, password)
       .then((data) => {
-            localStorage.setItem('jwt', data.data.jwt);
-        setLoggedIn(true);
-        localStorage.setItem('email', email);//+++
-       
-
-        // Проверка наличия токена перед вызовом getInfoUser()
         if (data.data.jwt) {
-          mainApi.getInfoUser()
-            .then((userData) => {
-              localStorage.setItem('user', JSON.stringify(userData));
-              setCurrentUser(userData);
-              navigate('/movies');
-            })
+          localStorage.setItem('jwt', data.data.jwt);
+          setLoggedIn(true);
+          localStorage.setItem('email', email);
+          setCurrentUser(data.data);
+          navigate('/movies');
         } else {
           // Токен отсутствует, перенаправляем пользователя на страницу входа
           console.log('Необходима повторная авторизация');
@@ -67,7 +49,6 @@ function App() {
       });
   };
 
-
   const handleRegister = ({ name, email, password }) => {
     mainApi
       .register(name, email, password)
@@ -77,23 +58,46 @@ function App() {
 
       })
       .catch((error) => {
-                console.error('Ошибка при регистрации:', error);
+        console.error('Ошибка при регистрации:', error);
         // Обработка ошибки регистрации
       });
   };
 
 
   React.useEffect(() => {
+    mainApi
+      .getContent()
+      .then((res) => {
+      //  setEmailUser(res.user.email);
+        setLoggedIn(true);
+        navigate('/', { replace: true });
+      })
+      .catch((err) => {
+        setLoggedIn(false);
+        console.error(err);
+      });
+    
     setIsLoading(true);
     Promise.all([mainApi.getInfoUser(), api.getMovies()])
       .then(([userData, moviesData]) => {
         localStorage.setItem('user', JSON.stringify(userData));
-        setCurrentUser(userData);
+        setCurrentUser(userData.user);
         setMovies(moviesData);
         setIsLoading(false);
       })
   }, []);
 
+  const handleUpdateUser = (data) => {
+    // api
+    // .changeUserInfo(data)
+    // .then((newUser) => {
+    //   setCurrentUser(newUser);
+    //   closeAllPopups();
+    // })
+    // .catch((err) => {
+    //   console.error(err);
+    // });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -108,9 +112,9 @@ function App() {
             movies={movies}
             isLoading={isLoading}
             loggedIn={loggedIn} />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile onUpdateUser={handleUpdateUser} loggedIn={loggedIn}/>} />
           <Route path="/signup" element={<Register onRegister={handleRegister} />} />
-          <Route path="/signin" element={<Login onLogin={handleLogin}  />} />
+          <Route path="/signin" element={<Login onLogin={handleLogin} />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </div>

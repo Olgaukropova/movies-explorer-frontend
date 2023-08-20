@@ -35,11 +35,12 @@ function Login({onLogin}) {
           <h1 className="form__header">Рады видеть!</h1>
           <li className="form__item">
             <label htmlFor="email">E-mail</label>
-            <input className="form__input" type="email" placeholder="pochta@yandex.ru" name="email" onChange={handleChangeEmail} value={email} />
+            <input className="form__input" type="email" placeholder="pochta@yandex.ru" name="email" onChange={handleChangeEmail} value={email} required/>
           </li>
           <li className="form__item">
             <label htmlFor="password" >Пароль</label>
-            <input className="form__input" type="password" placeholder="пароль" minLength={3} maxLength={14} name="password" onChange={handleChangePassword} value={password} />
+            <input className="form__input" type="password" placeholder="пароль" minLength={3} maxLength={14} name="password" onChange={handleChangePassword} 
+            value={password} required/>
           </li>
           <button className="form__button" type='submit'>Войти</button>
           <p className="form__text">Ещё не зарегистрированы?<Link className='form__text_link' to='/signup'>Регистрация</Link> </p>

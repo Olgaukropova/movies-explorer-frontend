@@ -30,9 +30,6 @@ class MainApi {
 
 
   authorize = (email, password) => {
-
-    const token = localStorage.getItem('jwt');
-
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: {
@@ -63,6 +60,17 @@ class MainApi {
     })
       .then(this._checkResponse);
 
+  };
+
+  getContent() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(this._checkResponse)
   };
 
   getSavedMovies(token) {
