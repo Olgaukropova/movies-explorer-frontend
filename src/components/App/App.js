@@ -22,7 +22,8 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
- 
+  const [savedMovies, setSavedMovies] = React.useState([]);
+
 
   const navigate = useNavigate();
 
@@ -63,20 +64,30 @@ function App() {
       });
   };
 
+  const handleSignOut = () => {
+    mainApi.signout()
+      .then(() => {
+        setLoggedIn(false);
+        navigate('/', { replace: true });
+        localStorage.removeItem('jwt');
+      })
+      .catch(console.error);
+  };
+
 
   React.useEffect(() => {
-    mainApi
-      .getContent()
-      .then((res) => {
-      //  setEmailUser(res.user.email);
+    //проверка наличия токена
+    const jwt = localStorage.getItem('jwt');
+    mainApi.getContent(jwt)
+      .then(() => {
         setLoggedIn(true);
-        navigate('/', { replace: true });
       })
       .catch((err) => {
         setLoggedIn(false);
+
         console.error(err);
       });
-    
+
     setIsLoading(true);
     Promise.all([mainApi.getInfoUser(), api.getMovies()])
       .then(([userData, moviesData]) => {
@@ -88,15 +99,27 @@ function App() {
   }, []);
 
   const handleUpdateUser = (data) => {
-    // api
-    // .changeUserInfo(data)
-    // .then((newUser) => {
-    //   setCurrentUser(newUser);
-    //   closeAllPopups();
-    // })
-    // .catch((err) => {
-    //   console.error(err);
-    // });
+    mainApi.updateUser(data)
+      .then((newUser) => {
+        setCurrentUser(newUser);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  const handleSaveMovies = (movie) => {
+    // const movieData = { ...movie };
+    // // Добавьте дополнительные данные фильма, которые требуются на сервере
+    // movieData.additionalProperty = 'value';
+    mainApi.savedMovies(movie)
+      .then(() => {
+        setSavedMovies()
+      })
+      .catch((err) => {
+        console.error(err);
+      }
+      )
   }
 
   return (
@@ -104,15 +127,20 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/movies" element={<ProtectedRouteElement element={Movies}
+          {loggedIn && <Route path="/movies" element={<ProtectedRouteElement element={Movies}
             movies={movies}
             isLoading={isLoading}
-            loggedIn={loggedIn} />} />
-          <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies}
+            loggedIn={loggedIn}
+            onSaved={handleSaveMovies}
+          />} />}
+          {loggedIn && <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies}
             movies={movies}
             isLoading={isLoading}
-            loggedIn={loggedIn} />} />
-          <Route path="/profile" element={<Profile onUpdateUser={handleUpdateUser} loggedIn={loggedIn}/>} />
+            loggedIn={loggedIn} />} />}
+          {loggedIn && <Route path="/profile" element={<ProtectedRouteElement element={Profile}
+            onUpdateUser={handleUpdateUser}
+            loggedIn={loggedIn}
+            signOut={handleSignOut} />} />}
           <Route path="/signup" element={<Register onRegister={handleRegister} />} />
           <Route path="/signin" element={<Login onLogin={handleLogin} />} />
           <Route path="*" element={<Error />} />

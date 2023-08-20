@@ -3,9 +3,11 @@ import "./MoviesCard.css";
 import { useLocation } from 'react-router-dom';
 
 
-function MoviesCard({ movie }) {
+function MoviesCard({ movie, onSaved }) {
   const location = useLocation();
   const pathname = location.pathname;
+
+  const [isLike, setIsLike] = React.useState(false);
 
   function formatDuration(duration) {
     const hours = Math.floor(duration / 60);
@@ -14,6 +16,10 @@ function MoviesCard({ movie }) {
     return `${hours}ч ${minutes}мин`;
   }
   
+  function onLike(movie){
+    setIsLike(!isLike);
+    onSaved(movie);
+  }
 
   return (
     <section className='movie'>
@@ -23,7 +29,7 @@ function MoviesCard({ movie }) {
           <p className='movie__info-time'>{formatDuration(movie.duration)}</p>
         </div>
         {(pathname === '/movies') ? (
-          <button className='buttonHeartSaved' type="button" ></button>
+          <button className={isLike ? 'buttonHeartSaved_active' :'buttonHeartSaved'} type="button" onClick={onLike}></button>
         ) : (
           <button className='buttonDelete' type="button" ></button>
         )}

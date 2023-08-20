@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 
 
-function Profile({ onUpdateUser }) {
+function Profile({ onUpdateUser, signOut }) {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
 
 
   const currentUser = React.useContext(CurrentUserContext);
+ 
 
   function handleNameChange(e) {
     setName(e.target.value)
@@ -22,19 +23,19 @@ function Profile({ onUpdateUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name,
-      // about: email,
+      email,
     });
   }
+
 
   return (
     <>
       <Header />
       <main>
         <section className="profile__container">
-          <h1 className="profile__title">Привет,{currentUser.name}</h1>
+          <h1 className="profile__title">Привет, {currentUser.name}</h1>
           <form className='profile__form' onSubmit={handleSubmit}>
             <div className='profile__info'>
               <p className='profile__info-value'>Имя</p>
@@ -47,7 +48,7 @@ function Profile({ onUpdateUser }) {
             </div>
             <div className='profile__button'>
               <button className="profile__button-submit profile__button-edit" type="submit" >Редактировать</button>
-              <Link className="profile__button-submit profile__button-logout" to="/" >Выйти из аккаунта</Link>
+              <Link className="profile__button-submit profile__button-logout" to="/" onClick={signOut} >Выйти из аккаунта</Link>
             </div>
             <button className="profile__button-saved" type="submit" >Сохранить</button>
             <div className='profile__button-error'>

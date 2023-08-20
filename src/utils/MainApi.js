@@ -73,6 +73,27 @@ class MainApi {
       .then(this._checkResponse)
   };
 
+  signout = () => {
+    return fetch(`${this._baseUrl}/signout`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then(this._checkResponse)
+  };
+
+  updateUser(data) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      credentials: 'include',
+      headers: this._headers,
+    })
+    .then(this._checkResponse)
+  };
+
   getSavedMovies(token) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
@@ -88,13 +109,26 @@ class MainApi {
 
 
 
-  savedMovies(data) {
-    return fetch(`${this._baseUrl}/movies`, {
+  savedMovies(movie) {
+    return fetch(`${this._baseUrl}/movies/`, {
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        // image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+        // thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        owner: movie.owner
+      }),
       headers: {
         ...this._headers,
-        Authorization: `Bearer ${data.token}`,
+        // Authorization: `Bearer ${data.token}`,
       },
       credentials: 'include'
     })
