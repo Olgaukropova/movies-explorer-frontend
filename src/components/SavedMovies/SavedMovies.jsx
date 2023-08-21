@@ -5,11 +5,11 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({ isLoading, savedMovies }) {
+function SavedMovies({ isLoading, savedMovies, onDelete }) {
 
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const [errorMessage, setErrorMessage] = React.useState(''); 
 
-
+// console.log(savedMovies)
   return (
     <>
       <Header />
@@ -22,6 +22,7 @@ function SavedMovies({ isLoading, savedMovies }) {
         <MoviesCardList
           isLoading={isLoading}
           movies={savedMovies}
+          onDelete={onDelete}
         />
         <div className='empty'></div>
       </main>

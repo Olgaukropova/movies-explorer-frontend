@@ -123,14 +123,28 @@ function App() {
       )
   }
 
-  const getSavedMovies =() =>{
+  const getSavedMovies = () => {
     mainApi.getSavedMovies()
-    .then((data) => {
-      setSavedMovies(data);
-      console.log(data)})
-    .catch((err) => {
-      console.error(err);
-    })
+      .then((data) => {
+        setSavedMovies(data);
+        console.log(data)
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
+
+  const handleDelete = (movie) => {
+    console.log('movie:', movie)
+    console.log('movie.id:', movie._id)
+
+    mainApi.deleteMovies(movie._id)
+      .then(() => {
+        setSavedMovies(savedMovies.filter(item => item._id !== movie._id));
+      })
+      .catch((err) => {
+        console.error(err);
+      })
   }
 
   return (
@@ -147,10 +161,11 @@ function App() {
           {loggedIn && <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies}
             movies={movies}
             isLoading={isLoading}
-            loggedIn={loggedIn} 
+            loggedIn={loggedIn}
             savedMovies={savedMovies}
+            onDelete={handleDelete}
           // getSavedMovies={getSavedMovies}
-           />} />}
+          />} />}
           {loggedIn && <Route path="/profile" element={<ProtectedRouteElement element={Profile}
             onUpdateUser={handleUpdateUser}
             loggedIn={loggedIn}

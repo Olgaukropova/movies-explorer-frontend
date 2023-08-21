@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ movies, isLoading, isShortMovies, onSaved }) {
+function MoviesCardList({ movies, isLoading, isShortMovies, onSaved, onDelete }) {
   const location = useLocation();
   const pathname = location.pathname;
 
@@ -26,6 +26,7 @@ function MoviesCardList({ movies, isLoading, isShortMovies, onSaved }) {
 
   function handleShowMore() {
     setOpenedMovies(movies.slice(0, openedMovies.length + 2));
+   
   };
 
   React.useEffect(() => {
@@ -39,8 +40,7 @@ function MoviesCardList({ movies, isLoading, isShortMovies, onSaved }) {
 
   // Фильтрация фильмов
   React.useEffect(() => {
-    if (isShortMovies) {
-
+    if (isShortMovies) {      
       const filteredMovies = movies.filter(movie => movie.duration <= 40);
       setOpenedMovies(filteredMovies.slice(0, sliceValue()));
       if (filteredMovies.length > 7 && pathname === '/movies') {
@@ -66,7 +66,7 @@ function MoviesCardList({ movies, isLoading, isShortMovies, onSaved }) {
       ) : (
         <>
           {openedMovies.map((movie) =>
-            <MoviesCard key={movie.id} movie={movie} onSaved={onSaved} />)}
+            <MoviesCard key={movie.id ? movie.id : movie._id} movie={movie} onSaved={onSaved} onDelete={onDelete}/>)}
           {showMore && openedMovies.length < movies.length &&
             <button className="list__button" type='button' onClick={handleShowMore}>Ещё</button>}
         </>
