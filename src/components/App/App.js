@@ -109,17 +109,28 @@ function App() {
   }
 
   const handleSaveMovies = (movie) => {
-    // const movieData = { ...movie };
-    // // Добавьте дополнительные данные фильма, которые требуются на сервере
-    // movieData.additionalProperty = 'value';
+    console.log('handleSaveMovies movie:', movie);
+
     mainApi.savedMovies(movie)
-      .then(() => {
-        setSavedMovies()
+      .then((data) => {
+        console.log(data)
+        setSavedMovies(data);
+        getSavedMovies();
       })
       .catch((err) => {
         console.error(err);
       }
       )
+  }
+
+  const getSavedMovies =() =>{
+    mainApi.getSavedMovies()
+    .then((data) => {
+      setSavedMovies(data);
+      console.log(data)})
+    .catch((err) => {
+      console.error(err);
+    })
   }
 
   return (
@@ -136,7 +147,10 @@ function App() {
           {loggedIn && <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies}
             movies={movies}
             isLoading={isLoading}
-            loggedIn={loggedIn} />} />}
+            loggedIn={loggedIn} 
+            savedMovies={savedMovies}
+          // getSavedMovies={getSavedMovies}
+           />} />}
           {loggedIn && <Route path="/profile" element={<ProtectedRouteElement element={Profile}
             onUpdateUser={handleUpdateUser}
             loggedIn={loggedIn}

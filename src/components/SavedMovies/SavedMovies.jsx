@@ -5,32 +5,24 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({ movies, isLoading }) {
-  const [search, setSearch] = React.useState([]);
+function SavedMovies({ isLoading, savedMovies }) {
+
   const [errorMessage, setErrorMessage] = React.useState('');
 
-  function searchMovies(query) {
-    setErrorMessage('');
-    const results = movies.filter(movie => movie.nameRU.includes(query));
-
-    if (results.length === 0) {
-      setErrorMessage('Ничего не найдено')
-    }
-
-    setSearch(results);
-  };
 
   return (
     <>
       <Header />
       <main>
         <SearchForm
-          onSearchMovies={searchMovies}
-          setErrorMessage={setErrorMessage} />
+          // onSearchMovies={searchMovies}
+          setErrorMessage={setErrorMessage}
+        />
         <span className="movies__error">{errorMessage}</span>
         <MoviesCardList
           isLoading={isLoading}
-          movies={search} />
+          movies={savedMovies}
+        />
         <div className='empty'></div>
       </main>
       <Footer />

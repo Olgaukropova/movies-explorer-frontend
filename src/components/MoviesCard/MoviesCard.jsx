@@ -17,6 +17,7 @@ function MoviesCard({ movie, onSaved }) {
   }
   
   function onLike(movie){
+    console.log('onLike movie:', movie);
     setIsLike(!isLike);
     onSaved(movie);
   }
@@ -29,7 +30,7 @@ function MoviesCard({ movie, onSaved }) {
           <p className='movie__info-time'>{formatDuration(movie.duration)}</p>
         </div>
         {(pathname === '/movies') ? (
-          <button className={isLike ? 'buttonHeartSaved_active' :'buttonHeartSaved'} type="button" onClick={onLike}></button>
+          <button className={isLike ? 'buttonHeartSaved_active' :'buttonHeartSaved'} type="button" onClick={() => onLike(movie)} ></button>
         ) : (
           <button className='buttonDelete' type="button" ></button>
         )}

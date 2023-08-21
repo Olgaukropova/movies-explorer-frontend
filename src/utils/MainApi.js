@@ -110,22 +110,26 @@ class MainApi {
 
 
   savedMovies(movie) {
+    console.log('movie:', movie); 
     return fetch(`${this._baseUrl}/movies/`, {
+     
       method: 'POST',
-      body: JSON.stringify({
+      body: JSON.stringify(
+        {
         country: movie.country,
         director: movie.director,
         duration: movie.duration,
         year: movie.year,
         description: movie.description,
-        // image: `https://api.nomoreparties.co${movie.image.url}`,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
         trailerLink: movie.trailerLink,
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
-        // thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
         movieId: movie.id,
         owner: movie.owner
-      }),
+      }
+      ),
       headers: {
         ...this._headers,
         // Authorization: `Bearer ${data.token}`,
