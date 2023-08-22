@@ -17,7 +17,7 @@ function MoviesCard({ movie, onSaved,  onDelete }) {
   }
 
   function onLike(movie) {
-    console.log('onLike movie:', movie);
+    // console.log('onLike movie:', movie);
     setIsLike(!isLike);
     onSaved(movie);
   }

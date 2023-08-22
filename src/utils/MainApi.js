@@ -109,8 +109,8 @@ class MainApi {
 
 
 
-  savedMovies(movie) {
-    console.log('movie:', movie);
+  savedMovies(movie, token) {
+    // console.log('movie:', movie);
     return fetch(`${this._baseUrl}/movies/`, {
 
       method: 'POST',
@@ -132,7 +132,7 @@ class MainApi {
       ),
       headers: {
         ...this._headers,
-        // Authorization: `Bearer ${data.token}`,
+       Authorization: `Bearer ${token}`,
       },
       credentials: 'include'
     })

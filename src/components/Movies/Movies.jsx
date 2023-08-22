@@ -11,16 +11,12 @@ function Movies({ movies, isLoading, onSaved }) {
   const [errorMessage, setErrorMessage] = React.useState('');
   const [isShortMovies, setShortMovies] = React.useState(false);
 
- 
-
   function searchMovies(query, isShortMovie) {
     setErrorMessage('');
     const results = movies.filter(movie => movie.nameRU.includes(query));
-
     if (results.length === 0) {
       setErrorMessage('Ничего не найдено')
     }
-
     setSearch(results);
 
     localStorage.setItem('searchQuery', query);
@@ -29,7 +25,7 @@ function Movies({ movies, isLoading, onSaved }) {
 
     // console.log('Search query:', query);
     // console.log('Short movie state:', isShortMovies);
-    console.log('Search results:', results);
+    // console.log('Search results:', results);
   };
 
   function updateIsShortMovie(value) {

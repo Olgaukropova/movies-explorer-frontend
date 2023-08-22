@@ -5,11 +5,17 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({ isLoading, savedMovies, onDelete }) {
+function SavedMovies({ isLoading, savedMovies, onDelete, getSavedMovies }) {
 
-  const [errorMessage, setErrorMessage] = React.useState(''); 
+  const [errorMessage, setErrorMessage] = React.useState('');
 
-// console.log(savedMovies)
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    getSavedMovies(jwt)
+
+  }, []);
+
+
   return (
     <>
       <Header />

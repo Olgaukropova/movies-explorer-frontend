@@ -70,6 +70,9 @@ function App() {
         setLoggedIn(false);
         navigate('/', { replace: true });
         localStorage.removeItem('jwt');
+        localStorage.removeItem('searchQuery');
+        localStorage.removeItem('isShortMovie');
+        localStorage.removeItem('searchResults');
       })
       .catch(console.error);
   };
@@ -90,11 +93,12 @@ function App() {
 
     setIsLoading(true);
     Promise.all([mainApi.getInfoUser(), api.getMovies()])
-      .then(([userData, moviesData]) => {
+      .then(([userData, moviesData, data]) => {
         localStorage.setItem('user', JSON.stringify(userData));
         setCurrentUser(userData.user);
         setMovies(moviesData);
         setIsLoading(false);
+
       })
   }, []);
 
@@ -109,13 +113,14 @@ function App() {
   }
 
   const handleSaveMovies = (movie) => {
-    console.log('handleSaveMovies movie:', movie);
-
-    mainApi.savedMovies(movie)
+    // console.log('handleSaveMovies movie:', movie);
+    const jwt = localStorage.getItem('jwt');
+    mainApi.savedMovies(movie, jwt)
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setSavedMovies(data);
-        getSavedMovies();
+
+        getSavedMovies(jwt);
       })
       .catch((err) => {
         console.error(err);
@@ -123,11 +128,12 @@ function App() {
       )
   }
 
-  const getSavedMovies = () => {
-    mainApi.getSavedMovies()
+  const getSavedMovies = (jwt) => {
+    mainApi.getSavedMovies(jwt)
       .then((data) => {
-        setSavedMovies(data);
-        console.log(data)
+        const filteredMovies = data.filter((movieItem) => movieItem.userId === jwt.userId);
+        console.log("Saved movies:", filteredMovies);
+        setSavedMovies(filteredMovies);
       })
       .catch((err) => {
         console.error(err);
@@ -164,6 +170,7 @@ function App() {
             loggedIn={loggedIn}
             savedMovies={savedMovies}
             onDelete={handleDelete}
+            getSavedMovies={getSavedMovies}
           // getSavedMovies={getSavedMovies}
           />} />}
           {loggedIn && <Route path="/profile" element={<ProtectedRouteElement element={Profile}
