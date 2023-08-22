@@ -1,7 +1,12 @@
 import React from 'react';
 import './SearchForm.css';
+import { useLocation } from 'react-router-dom';
 
-function SearchForm({ onSearchMovies, setErrorMessage, updateIsShortMovie }) {
+function SearchForm({ onSearchMovies, onSearchSavedMovies, setErrorMessage, updateIsShortMovie }) {
+  
+  const location = useLocation();
+  const pathname = location.pathname;
+  
   const [name, setName] = React.useState('');
   const [error, setError] = React.useState('');
   const [isShortMovies, setShortMovies] = React.useState(false);
@@ -18,7 +23,11 @@ function SearchForm({ onSearchMovies, setErrorMessage, updateIsShortMovie }) {
       setErrorMessage('');
     } else {
       setError('');
-      onSearchMovies(name, isShortMovies);
+      if (pathname === '/movies') {
+        onSearchMovies(name, isShortMovies);
+      }else{
+        onSearchSavedMovies(name, isShortMovies);
+      }      
      }
   }
 

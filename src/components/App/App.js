@@ -23,6 +23,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
+  // const [filteredMovies, setFilteredMovies] = React.useState([]);
 
 
   const navigate = useNavigate();
@@ -112,14 +113,17 @@ function App() {
       });
   }
 
-  const handleSaveMovies = (movie) => {
+  const handleSaveMovies = (movie, isLike) => {
     // console.log('handleSaveMovies movie:', movie);
     const jwt = localStorage.getItem('jwt');
     mainApi.savedMovies(movie, jwt)
       .then((data) => {
-        // console.log(data)
-        setSavedMovies(data);
-
+        console.log(isLike)
+        const updatedMovies = savedMovies.map((m) =>
+        m.id === movie.id ? { ...m, isSaved: true, isLike: isLike } : m
+      );
+      setSavedMovies(updatedMovies);
+        // setSavedMovies(data);
         getSavedMovies(jwt);
       })
       .catch((err) => {
@@ -131,9 +135,9 @@ function App() {
   const getSavedMovies = (jwt) => {
     mainApi.getSavedMovies(jwt)
       .then((data) => {
-        const filteredMovies = data.filter((movieItem) => movieItem.userId === jwt.userId);
-        console.log("Saved movies:", filteredMovies);
-        setSavedMovies(filteredMovies);
+        const filteredMoviesData = data.filter((movieItem) => movieItem.userId === jwt.userId);
+        console.log("filteredMoviesData:", filteredMoviesData);
+        setSavedMovies(filteredMoviesData);
       })
       .catch((err) => {
         console.error(err);
@@ -141,8 +145,8 @@ function App() {
   }
 
   const handleDelete = (movie) => {
-    console.log('movie:', movie)
-    console.log('movie.id:', movie._id)
+    // console.log('movie:', movie)
+    // console.log('movie.id:', movie._id)
 
     mainApi.deleteMovies(movie._id)
       .then(() => {
@@ -168,10 +172,9 @@ function App() {
             movies={movies}
             isLoading={isLoading}
             loggedIn={loggedIn}
-            savedMovies={savedMovies}
             onDelete={handleDelete}
             getSavedMovies={getSavedMovies}
-          // getSavedMovies={getSavedMovies}
+            savedMovies={savedMovies}
           />} />}
           {loggedIn && <Route path="/profile" element={<ProtectedRouteElement element={Profile}
             onUpdateUser={handleUpdateUser}

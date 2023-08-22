@@ -23,9 +23,9 @@ function Movies({ movies, isLoading, onSaved }) {
     localStorage.setItem('isShortMovie', isShortMovie);
     localStorage.setItem('searchResults', JSON.stringify(results));
 
-    // console.log('Search query:', query);
-    // console.log('Short movie state:', isShortMovies);
-    // console.log('Search results:', results);
+    console.log('Search query:', query);
+    console.log('Short movie state:', isShortMovies);
+    console.log('Search results:', results);
   };
 
   function updateIsShortMovie(value) {

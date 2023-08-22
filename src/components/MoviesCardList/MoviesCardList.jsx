@@ -6,14 +6,13 @@ import { useLocation } from 'react-router-dom';
 
 import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ movies, isLoading, isShortMovies, onSaved, onDelete }) {
+function MoviesCardList({ movies, isLoading, isShortMovies, onSaved, onDelete, searchSaveMovies }) {
   const location = useLocation();
   const pathname = location.pathname;
 
-  const [openedMovies, setOpenedMovies] = React.useState(movies.slice(0, sliceValue(pathname)));
-  // console.log(openedMovies, 'openedMovies');
   const [showMore, setShowMore] = React.useState(false);
-
+  const [openedMovies, setOpenedMovies] = React.useState(movies.slice(0, sliceValue(pathname)));
+  
   function sliceValue(pathname) {
     if (pathname === '/movies') {
       return 7;
@@ -22,11 +21,18 @@ function MoviesCardList({ movies, isLoading, isShortMovies, onSaved, onDelete })
     }
   }
 
+React.useEffect(() => {
+  setOpenedMovies(movies.slice(0, sliceValue(pathname)));
+  // console.log( filteredMovies , ' filteredMovies ');
+   console.log( onSaved , 'onSaved ');
+
+}, [pathname, movies]);
+
+
   // console.log('isShortMovies in MoviesCardList:', isShortMovies);
 
   function handleShowMore() {
-    setOpenedMovies(movies.slice(0, openedMovies.length + 2));
-   
+    setOpenedMovies(movies.slice(0, openedMovies.length + 2));   
   };
 
   React.useEffect(() => {
@@ -38,26 +44,30 @@ function MoviesCardList({ movies, isLoading, isShortMovies, onSaved, onDelete })
     }
   }, [movies, pathname]);
 
-  // Фильтрация фильмов
-  React.useEffect(() => {
-    if (isShortMovies) {      
-      const filteredMovies = movies.filter(movie => movie.duration <= 40);
-      setOpenedMovies(filteredMovies.slice(0, sliceValue()));
-      if (filteredMovies.length > 7 && pathname === '/movies') {
-        setShowMore(true)
-      } else {
-        setShowMore(false)
-      }
+// Фильтрация фильмов
+React.useEffect(() => {
+  if (isShortMovies) {      
+    const filteredMovies = movies.filter(movie => movie.duration <= 40);
+    setOpenedMovies(filteredMovies.slice(0, sliceValue()));
+    if (filteredMovies.length > 7 && pathname === '/movies') {
+      setShowMore(true)
     } else {
-      setOpenedMovies(movies.slice(0, sliceValue()));
-      if (movies.length > 7 && pathname === '/movies') {
-        setShowMore(true)
-      } else {
-        setShowMore(false)
-      }
-
+      setShowMore(false)
     }
-  }, [isShortMovies, movies, pathname]);
+  } else {
+    setOpenedMovies(movies.slice(0, sliceValue()));
+    console.log( onSaved , 'onSaved ');
+
+    if (movies.length > 7 && pathname === '/movies') {
+      setShowMore(true)
+    } else {
+      setShowMore(false)
+    }
+
+  }
+}, [isShortMovies, movies, pathname]);
+
+  // const displayedMovies = pathname === '/saved-movies' ? filteredMovies : openedMovies;
 
   return (
     <section className='movies'>
