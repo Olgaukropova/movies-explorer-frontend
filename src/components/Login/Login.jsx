@@ -4,7 +4,7 @@ import logo from '../../logo.svg';
 import { Link } from 'react-router-dom';
 
 
-function Login({onLogin}) {
+function Login({ onLogin }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -35,15 +35,20 @@ function Login({onLogin}) {
           <h1 className="form__header">Рады видеть!</h1>
           <li className="form__item">
             <label htmlFor="email">E-mail</label>
-            <input className="form__input" type="email" placeholder="pochta@yandex.ru" name="email" onChange={handleChangeEmail} value={email} required/>
+            <input className="form__input" type="email" placeholder="pochta@yandex.ru" name="email" onChange={handleChangeEmail} value={email} required />
+            {errors.email && <span className='form__error_validation_register'>{errors.email}</span>}   
           </li>
           <li className="form__item">
             <label htmlFor="password" >Пароль</label>
-            <input className="form__input" type="password" placeholder="пароль" minLength={3} maxLength={14} name="password" onChange={handleChangePassword} 
-            value={password} required/>
+            <input className="form__input" type="password" placeholder="пароль" minLength={3} maxLength={14} name="password" onChange={handleChangePassword}
+              value={password} required />
+                {errors.password && <span className='form__error_validation_register'>{errors.password}</span>}
           </li>
-          <button className="form__button" type='submit'>Войти</button>
-          <p className="form__text">Ещё не зарегистрированы?<Link className='form__text_link' to='/signup'>Регистрация</Link> </p>
+          <div className='form__button-block'>
+            {message && <span className='form__error_register'>{message}</span>}
+            <button className="form__button" type='submit'>Войти</button>
+            <p className="form__text">Ещё не зарегистрированы?<Link className='form__text_link' to='/signup'>Регистрация</Link> </p>
+          </div>
         </form >
       </section>
     </main>

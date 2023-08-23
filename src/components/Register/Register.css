@@ -80,7 +80,7 @@
 }
 
 .form__button-register {
-  margin-top: 68px;
+  margin-top: 0;
   min-height: 45px;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
@@ -96,7 +96,7 @@
 }
 
 .form__button_disabled {
-  margin-top: 68px;
+  margin-top: 0;
   min-height: 45px;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
@@ -107,7 +107,8 @@
   color: #C2C2C2;
   border: 0;
   border-radius: 3px;
-  background-color: #F8F8F8;;
+  background-color: #F8F8F8;
+  ;
   cursor: pointer;
 }
 
@@ -193,5 +194,26 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.form__error_validation_register {
+  margin: 0;
+  padding: 0;
+  color: #EE3465;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   margin-top: 8px;
+}
+
+.form__button-block {
+  margin: 0;
+  padding: 0;
+  margin-top: 68px;
+  display: flex;
+  flex-direction: column;
 }
