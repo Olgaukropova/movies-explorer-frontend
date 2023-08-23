@@ -160,7 +160,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Main loggedIn={loggedIn}/>} />
           {loggedIn && <Route path="/movies" element={<ProtectedRouteElement element={Movies}
             movies={movies}
             isLoading={isLoading}

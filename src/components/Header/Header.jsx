@@ -8,7 +8,7 @@ import SwitchButton from '../SwitchButton/SwitchButton';
 import ButtonLogin from '../ButtonLogin/ButtonLogin';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
-function Header() {
+function Header({loggedIn}) {
   const location = useLocation();
   const pathname = location.pathname;
   const[openBurgerMenu ,setOpenBurgerMenu] = React.useState(false);
@@ -26,7 +26,7 @@ const closeBurgerMenu = () => {
       <Link to="/">
         <img className="header_logo" src={logo} alt="логотип" />
       </Link>
-      {(pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') ? (
+      {/* {(pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile') ? (
         <>
           <Navigation />
           <SwitchButton 
@@ -41,7 +41,28 @@ const closeBurgerMenu = () => {
         <>
           <ButtonLogin />
         </>
-      )}
+      )} */}
+       {pathname === '/movies' || pathname === '/saved-movies' || pathname === '/profile' ? (
+      <>
+        <Navigation />
+        <SwitchButton onBurgerMenu={handleBurgerMenu} />
+        <BurgerMenu isOpen={openBurgerMenu} onClose={closeBurgerMenu} />
+      </>
+    ) : (
+      <>
+        {loggedIn ? (
+          <>
+            <Navigation />
+            <SwitchButton onBurgerMenu={handleBurgerMenu} />
+            <BurgerMenu isOpen={openBurgerMenu} onClose={closeBurgerMenu} />
+          </>
+        ) : (
+          <>
+            <ButtonLogin />
+          </>
+        )}
+      </>
+    )}
     </header>
   );
 }
