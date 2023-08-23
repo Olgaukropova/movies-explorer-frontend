@@ -34,14 +34,13 @@ class MainApi {
       method: 'POST',
       headers: {
         "Accept": "application/json",
-        'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',       
       },
       credentials: 'include',
       body: JSON.stringify({
         email,
         password,
-        // token
+        
       })
     })
       .then(this._checkResponse)
@@ -94,12 +93,12 @@ class MainApi {
       .then(this._checkResponse)
   };
 
-  getSavedMovies(token) {
+  getSavedMovies(jwt) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
       headers: {
         ...this._headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${jwt}`,
       },
       credentials: 'include'
     })
@@ -109,7 +108,7 @@ class MainApi {
 
 
 
-  savedMovies(movie, token) {
+  savedMovies(movie) {
     // console.log('movie:', movie);
     return fetch(`${this._baseUrl}/movies/`, {
 
@@ -132,7 +131,7 @@ class MainApi {
       ),
       headers: {
         ...this._headers,
-       Authorization: `Bearer ${token}`,
+      //  Authorization: `Bearer ${token}`,
       },
       credentials: 'include'
     })

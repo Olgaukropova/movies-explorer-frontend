@@ -3,11 +3,11 @@ import "./MoviesCard.css";
 import { useLocation } from 'react-router-dom';
 
 
-function MoviesCard({ movie, onSaved,  onDelete }) {
+function MoviesCard({ movie, onSaved, onDelete }) {
   const location = useLocation();
   const pathname = location.pathname;
 
-  const [isLike, setIsLike] = React.useState(false);
+const [isLike, setIsLike] = React.useState(movie.isLike);
 
   function formatDuration(duration) {
     const hours = Math.floor(duration / 60);
@@ -17,14 +17,17 @@ function MoviesCard({ movie, onSaved,  onDelete }) {
   }
 
   function onLike(movie) {
-    // console.log('onLike movie:', movie);
+    console.log('onLike movie:', movie);
     setIsLike(!isLike);
-    onSaved(movie, !isLike);
- console.log('!isLike:', !isLike);
+        onSaved(movie, !isLike);
+     console.log('!isLike:', !isLike);
+    movie.isLike = !movie.isLike;
+    console.log(movie)
   }
 
   function onDel(movie) {
     setIsLike(!isLike);
+    movie.isLike = !movie.isLike;
     onDelete(movie);
   }
 

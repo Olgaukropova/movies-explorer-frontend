@@ -23,9 +23,6 @@ function Movies({ movies, isLoading, onSaved }) {
     localStorage.setItem('isShortMovie', isShortMovie);
     localStorage.setItem('searchResults', JSON.stringify(results));
 
-    console.log('Search query:', query);
-    console.log('Short movie state:', isShortMovies);
-    console.log('Search results:', results);
   };
 
   function updateIsShortMovie(value) {
@@ -40,6 +37,14 @@ function Movies({ movies, isLoading, onSaved }) {
     if (searchQuery && isShortMovie && searchResults) {
       setSearch(searchResults);
       setShortMovies(isShortMovie);
+    }
+  }, []);
+  
+  React.useEffect(() => {
+    if (localStorage.getItem('shortMovies') === 'true') {
+      setShortMovies(true);
+    } else {
+      setShortMovies(false);
     }
   }, []);
 

@@ -13,6 +13,8 @@ function SavedMovies({ isLoading, onDelete, getSavedMovies, savedMovies }) {
   const [errorMessage, setErrorMessage] = React.useState('');
   const [searchSaveMovies, setSearchSaveMovies] = React.useState([]);
   const [displayedMovies, setDisplayedMovies] = React.useState([]);
+  const [isShortMovies, setShortMovies] = React.useState(false);
+
 
   function searchFilteredMovies(query, isShortMovie) {
     setErrorMessage('');
@@ -21,6 +23,11 @@ function SavedMovies({ isLoading, onDelete, getSavedMovies, savedMovies }) {
       setErrorMessage('Ничего не найдено');
     }
     setSearchSaveMovies(results);
+  };
+
+  
+  function updateIsShortMovie(value) {
+    setShortMovies(value)
   };
 
   React.useEffect(() => {
@@ -40,12 +47,14 @@ function SavedMovies({ isLoading, onDelete, getSavedMovies, savedMovies }) {
         <SearchForm
           setErrorMessage={setErrorMessage}
           onSearchSavedMovies={searchFilteredMovies}
+          updateIsShortMovie = {updateIsShortMovie}
         />
         <span className="movies__error">{errorMessage}</span>
         <MoviesCardList
           isLoading={isLoading}
           onDelete={onDelete}
           movies={displayedMovies}
+          isShortMovies={isShortMovies}          
         />
         <div className='empty'></div>
       </main>

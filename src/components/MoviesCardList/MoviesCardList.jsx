@@ -45,6 +45,27 @@ React.useEffect(() => {
   }, [movies, pathname]);
 
 // Фильтрация фильмов
+// React.useEffect(() => {
+//   if (isShortMovies) {      
+//     const filteredMovies = movies.filter(movie => movie.duration <= 40);
+//     setOpenedMovies(filteredMovies.slice(0, sliceValue()));
+//     if (filteredMovies.length > 7 && pathname === '/movies') {
+//       setShowMore(true)
+//     } else {
+//       setShowMore(false)
+//     }
+//   } else {
+//     setOpenedMovies(movies.slice(0, sliceValue()));
+//     console.log( onSaved , 'onSaved ');
+
+//     if (movies.length > 7 && pathname === '/movies') {
+//       setShowMore(true)
+//     } else {
+//       setShowMore(false)
+//     }
+
+//   }
+// }, [isShortMovies, movies, pathname]);
 React.useEffect(() => {
   if (isShortMovies) {      
     const filteredMovies = movies.filter(movie => movie.duration <= 40);
@@ -56,18 +77,13 @@ React.useEffect(() => {
     }
   } else {
     setOpenedMovies(movies.slice(0, sliceValue()));
-    console.log( onSaved , 'onSaved ');
-
     if (movies.length > 7 && pathname === '/movies') {
       setShowMore(true)
     } else {
       setShowMore(false)
     }
-
   }
 }, [isShortMovies, movies, pathname]);
-
-  // const displayedMovies = pathname === '/saved-movies' ? filteredMovies : openedMovies;
 
   return (
     <section className='movies'>

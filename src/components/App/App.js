@@ -23,7 +23,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
-  
+
 
   const navigate = useNavigate();
 
@@ -64,43 +64,7 @@ function App() {
       });
   };
 
-  const handleSignOut = () => {
-    mainApi.signout()
-      .then(() => {
-        setLoggedIn(false);
-        navigate('/', { replace: true });
-        localStorage.removeItem('jwt');
-        localStorage.removeItem('searchQuery');
-        localStorage.removeItem('isShortMovie');
-        localStorage.removeItem('searchResults');
-      })
-      .catch(console.error);
-  };
-
-
-  React.useEffect(() => {
-    //проверка наличия токена
-    const jwt = localStorage.getItem('jwt');
-    mainApi.getContent(jwt)
-      .then(() => {
-        setLoggedIn(true);
-      })
-      .catch((err) => {
-        setLoggedIn(false);
-
-        console.error(err);
-      });
-
-    setIsLoading(true);
-    Promise.all([mainApi.getInfoUser(), api.getMovies()])
-      .then(([userData, moviesData, data]) => {
-        localStorage.setItem('user', JSON.stringify(userData));
-        setCurrentUser(userData.user);
-        setMovies(moviesData);
-        setIsLoading(false);
-
-      })
-  }, []);
+ 
 
   const handleUpdateUser = (data) => {
     mainApi.updateUser(data)
@@ -113,7 +77,6 @@ function App() {
   }
 
   const handleSaveMovies = (movie, isLike) => {
-    // console.log('handleSaveMovies movie:', movie);
     const jwt = localStorage.getItem('jwt');
     mainApi.savedMovies(movie, jwt)
       .then((data) => {
@@ -123,7 +86,7 @@ function App() {
         );
         setSavedMovies(updatedMovies);
         // setSavedMovies(data);
-        getSavedMovies(jwt);
+        getSavedMovies(jwt,);
       })
       .catch((err) => {
         console.error(err);
@@ -131,8 +94,8 @@ function App() {
       )
   }
 
-  const getSavedMovies = (jwt) => {
-    mainApi.getSavedMovies(jwt)
+  const getSavedMovies = (jwt, isLike) => {
+    mainApi.getSavedMovies(jwt, isLike)
       .then((data) => {
         const filteredMoviesData = data.filter((movieItem) => movieItem.userId === jwt.userId);
         console.log("filteredMoviesData:", filteredMoviesData);
@@ -156,11 +119,49 @@ function App() {
       })
   }
 
+  
+  React.useEffect(() => {
+    //проверка наличия токена
+    const jwt = localStorage.getItem('jwt');
+    mainApi.getContent(jwt)
+      .then(() => {
+        setLoggedIn(true);
+      })
+      .catch((err) => {
+        setLoggedIn(false);
+
+        console.error(err);
+      });
+
+    setIsLoading(true);
+    Promise.all([mainApi.getInfoUser(), api.getMovies()])
+      .then(([userData, moviesData]) => {
+        localStorage.setItem('user', JSON.stringify(userData));
+        setCurrentUser(userData.user);
+        setMovies(moviesData);
+        setIsLoading(false);
+
+      })
+  }, []);
+
+  const handleSignOut = () => {
+    mainApi.signout()
+      .then(() => {
+        setLoggedIn(false);
+        navigate('/', { replace: true });
+        localStorage.removeItem('jwt');
+        localStorage.removeItem('searchQuery');
+        localStorage.removeItem('isShortMovie');
+        localStorage.removeItem('searchResults');
+      })
+      .catch(console.error);
+  };
+  
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Main loggedIn={loggedIn}/>} />
+          <Route path="/" element={<Main loggedIn={loggedIn} />} />
           {loggedIn && <Route path="/movies" element={<ProtectedRouteElement element={Movies}
             movies={movies}
             isLoading={isLoading}
