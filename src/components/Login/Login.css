@@ -84,7 +84,7 @@
 }
 
 .form__button {
-  margin-top: 179px;
+  margin-top: 0;
   min-height: 45px;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;

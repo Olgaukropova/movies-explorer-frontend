@@ -23,8 +23,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [savedMovies, setSavedMovies] = React.useState([]);
-  // const [filteredMovies, setFilteredMovies] = React.useState([]);
-
+  
 
   const navigate = useNavigate();
 
@@ -120,9 +119,9 @@ function App() {
       .then((data) => {
         console.log(isLike)
         const updatedMovies = savedMovies.map((m) =>
-        m.id === movie.id ? { ...m, isSaved: true, isLike: isLike } : m
-      );
-      setSavedMovies(updatedMovies);
+          m.id === movie.id ? { ...m, isSaved: true, isLike: isLike } : m
+        );
+        setSavedMovies(updatedMovies);
         // setSavedMovies(data);
         getSavedMovies(jwt);
       })
