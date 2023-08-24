@@ -8,23 +8,21 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 function SavedMovies({ isLoading, onDelete, getSavedMovies, savedMovies }) {
-  console.log(savedMovies);
-
+ 
   const [errorMessage, setErrorMessage] = React.useState('');
   const [searchSaveMovies, setSearchSaveMovies] = React.useState([]);
   const [displayedMovies, setDisplayedMovies] = React.useState([]);
   const [isShortMovies, setShortMovies] = React.useState(false);
 
 
-  function searchFilteredMovies(query, isShortMovie) {
+  function searchFilteredMovies(query) {
     setErrorMessage('');
-    const results = savedMovies.filter(movie => movie.nameRU.includes(query));
+    const results = savedMovies.filter(movie => movie.nameRU.toLowerCase().includes(query.toLowerCase()));
     if (results.length === 0) {
       setErrorMessage('Ничего не найдено');
     }
     setSearchSaveMovies(results);
   };
-
   
   function updateIsShortMovie(value) {
     setShortMovies(value)

@@ -17,12 +17,12 @@ const [isLike, setIsLike] = React.useState(movie.isLike);
   }
 
   function onLike(movie) {
-    console.log('onLike movie:', movie);
+    // console.log('onLike movie:', movie);
     setIsLike(!isLike);
         onSaved(movie, !isLike);
-     console.log('!isLike:', !isLike);
+    //  console.log('!isLike:', !isLike);
     movie.isLike = !movie.isLike;
-    console.log(movie)
+    // console.log(movie)
   }
 
   function onDel(movie) {

@@ -80,7 +80,7 @@ function App() {
     const jwt = localStorage.getItem('jwt');
     mainApi.savedMovies(movie, jwt)
       .then((data) => {
-        console.log(isLike)
+        // console.log(isLike)
         const updatedMovies = savedMovies.map((m) =>
           m.id === movie.id ? { ...m, isSaved: true, isLike: isLike } : m
         );
@@ -98,7 +98,7 @@ function App() {
     mainApi.getSavedMovies(jwt, isLike)
       .then((data) => {
         const filteredMoviesData = data.filter((movieItem) => movieItem.userId === jwt.userId);
-        console.log("filteredMoviesData:", filteredMoviesData);
+        // console.log("filteredMoviesData:", filteredMoviesData);
         setSavedMovies(filteredMoviesData);
       })
       .catch((err) => {
@@ -106,7 +106,7 @@ function App() {
       })
   }
 
-  const handleDelete = (movie) => {
+   const handleDelete = (movie) => {
     // console.log('movie:', movie)
     // console.log('movie.id:', movie._id)
 
@@ -153,6 +153,9 @@ function App() {
         localStorage.removeItem('searchQuery');
         localStorage.removeItem('isShortMovie');
         localStorage.removeItem('searchResults');
+        localStorage.removeItem('email');
+        localStorage.removeItem('user');
+      
       })
       .catch(console.error);
   };

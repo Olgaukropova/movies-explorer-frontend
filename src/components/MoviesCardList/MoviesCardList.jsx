@@ -10,7 +10,7 @@ function MoviesCardList({ movies, isLoading, isShortMovies, onSaved, onDelete, s
   const location = useLocation();
   const pathname = location.pathname;
 
-  const [showMore, setShowMore] = React.useState(false);
+  // const [showMore, setShowMore] = React.useState(false);
   const [openedMovies, setOpenedMovies] = React.useState(movies.slice(0, sliceValue(pathname)));
   
   function sliceValue(pathname) {
@@ -24,63 +24,42 @@ function MoviesCardList({ movies, isLoading, isShortMovies, onSaved, onDelete, s
 React.useEffect(() => {
   setOpenedMovies(movies.slice(0, sliceValue(pathname)));
   // console.log( filteredMovies , ' filteredMovies ');
-   console.log( onSaved , 'onSaved ');
+  //  console.log( onSaved , 'onSaved ');
 
 }, [pathname, movies]);
 
-
   // console.log('isShortMovies in MoviesCardList:', isShortMovies);
 
-  function handleShowMore() {
-    setOpenedMovies(movies.slice(0, openedMovies.length + 2));   
-  };
+  // function handleShowMore() {
+  //   setOpenedMovies(movies.slice(0, openedMovies.length + 2));   
+  // };
 
   React.useEffect(() => {
     setOpenedMovies(movies.slice(0, sliceValue()));
     if (movies.length > 7 && pathname === '/movies') {
-      setShowMore(true)
+      // setShowMore(true)
     } else {
-      setShowMore(false)
+      // setShowMore(false)
     }
   }, [movies, pathname]);
 
 // Фильтрация фильмов
-// React.useEffect(() => {
-//   if (isShortMovies) {      
-//     const filteredMovies = movies.filter(movie => movie.duration <= 40);
-//     setOpenedMovies(filteredMovies.slice(0, sliceValue()));
-//     if (filteredMovies.length > 7 && pathname === '/movies') {
-//       setShowMore(true)
-//     } else {
-//       setShowMore(false)
-//     }
-//   } else {
-//     setOpenedMovies(movies.slice(0, sliceValue()));
-//     console.log( onSaved , 'onSaved ');
 
-//     if (movies.length > 7 && pathname === '/movies') {
-//       setShowMore(true)
-//     } else {
-//       setShowMore(false)
-//     }
-
-//   }
-// }, [isShortMovies, movies, pathname]);
 React.useEffect(() => {
   if (isShortMovies) {      
     const filteredMovies = movies.filter(movie => movie.duration <= 40);
     setOpenedMovies(filteredMovies.slice(0, sliceValue()));
     if (filteredMovies.length > 7 && pathname === '/movies') {
-      setShowMore(true)
+      // setShowMore(true)
     } else {
-      setShowMore(false)
+      // setShowMore(false)
     }
   } else {
     setOpenedMovies(movies.slice(0, sliceValue()));
     if (movies.length > 7 && pathname === '/movies') {
-      setShowMore(true)
+      // setShowMore(true)
     } else {
-      setShowMore(false)
+      // setShowMore(false)
     }
   }
 }, [isShortMovies, movies, pathname]);
@@ -93,8 +72,10 @@ React.useEffect(() => {
         <>
           {openedMovies.map((movie) =>
             <MoviesCard key={movie.id ? movie.id : movie._id} movie={movie} onSaved={onSaved} onDelete={onDelete}/>)}
-          {showMore && openedMovies.length < movies.length &&
-            <button className="list__button" type='button' onClick={handleShowMore}>Ещё</button>}
+          {/* {showMore && openedMovies.length < movies.length &&
+            <button className="list__button" type='button' 
+            // onClick={handleShowMore}
+            >Ещё</button>} */}
         </>
       )
       }

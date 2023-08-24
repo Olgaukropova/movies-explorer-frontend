@@ -13,15 +13,19 @@ function Movies({ movies, isLoading, onSaved }) {
 
   function searchMovies(query, isShortMovie) {
     setErrorMessage('');
-    const results = movies.filter(movie => movie.nameRU.includes(query));
+    const results = movies.filter(movie => movie.nameRU.toLowerCase().includes(query.toLowerCase()));
     if (results.length === 0) {
       setErrorMessage('Ничего не найдено')
     }
     setSearch(results);
 
-    localStorage.setItem('searchQuery', query);
+   localStorage.setItem('searchQuery', query);
     localStorage.setItem('isShortMovie', isShortMovie);
     localStorage.setItem('searchResults', JSON.stringify(results));
+
+    console.log('query:', query);
+    console.log('isShortMovie:', isShortMovie);
+    console.log('results:', results);   
 
   };
 
@@ -30,9 +34,14 @@ function Movies({ movies, isLoading, onSaved }) {
   };
 
   React.useEffect(() => {
-    const searchQuery = localStorage.getItem('searchQuery');
+   
+   const searchQuery = localStorage.getItem('searchQuery');    
     const isShortMovie = localStorage.getItem('isShortMovie');
-    const searchResults = JSON.parse(localStorage.getItem('searchResults'));
+    const searchResults = JSON.parse(localStorage.getItem('searchResults')); 
+
+    console.log('searchQuery:', searchQuery);
+    console.log('isShortMovie:', isShortMovie);
+    console.log('searchResults:', searchResults);
 
     if (searchQuery && isShortMovie && searchResults) {
       setSearch(searchResults);
