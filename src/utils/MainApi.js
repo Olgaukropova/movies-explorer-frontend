@@ -5,17 +5,19 @@ class MainApi {
   }
 
   _checkResponse(res) {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    if (res.ok) return res.json();
+    return res
+      .text()
+      .then((text) => {
+        throw JSON.parse(text).message || JSON.parse(text).error;
+      });
   }
 
   register(name, email, password) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name,
@@ -33,43 +35,31 @@ class MainApi {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: {
-        "Accept": "application/json",
-        'Content-Type': 'application/json',       
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
       credentials: 'include',
       body: JSON.stringify({
         email,
         password,
-        
+
       })
     })
-      .then(this._checkResponse)
+      .then(this._checkResponse);
   };
 
   //запрос данных о пользователе с сервера
-  getInfoUser(token) {
+  getInfoUser() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: {
-        "Accept": "application/json",
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
       },
       credentials: 'include'
     })
       .then(this._checkResponse);
 
-  };
-
-  getContent() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
-      .then(this._checkResponse)
   };
 
   signout = () => {
@@ -80,7 +70,7 @@ class MainApi {
         'Content-Type': 'application/json',
       }
     })
-      .then(this._checkResponse)
+      .then(this._checkResponse);
   };
 
   updateUser(data) {
@@ -90,15 +80,14 @@ class MainApi {
       credentials: 'include',
       headers: this._headers,
     })
-      .then(this._checkResponse)
+      .then(this._checkResponse);
   };
 
-  getSavedMovies(jwt) {
+  getSavedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'GET',
       headers: {
         ...this._headers,
-        Authorization: `Bearer ${jwt}`,
       },
       credentials: 'include'
     })
@@ -107,11 +96,8 @@ class MainApi {
   };
 
 
-
   savedMovies(movie) {
-    // console.log('movie:', movie);
-    return fetch(`${this._baseUrl}/movies/`, {
-
+    return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       body: JSON.stringify(
         {
@@ -126,25 +112,21 @@ class MainApi {
           nameEN: movie.nameEN,
           thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
           movieId: movie.id,
-          owner: movie.owner
         }
       ),
       headers: {
         ...this._headers,
-      //  Authorization: `Bearer ${token}`,
       },
       credentials: 'include'
     })
       .then(this._checkResponse);
   }
 
-  //Попап удаления карточки
-  deleteMovies(movieId, token) {
+  deleteMovies(movieId) {
     return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: 'DELETE',
       headers: {
         ...this._headers,
-        Authorization: `Bearer ${token}`,
       },
       credentials: 'include'
     })

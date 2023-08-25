@@ -1,5 +1,6 @@
 import React from 'react';
-import "./Promo.css";
+import './Promo.css';
+import { Link } from 'react-scroll';
 
 function Promo() {
   return (
@@ -7,25 +8,25 @@ function Promo() {
       <h1 className="promo__header">Учебный проект студента факультета Веб-разработки.</h1>
       <nav>
         <ul className="promo__navigation">
-          <li className='promo__navigation_item'>
-            <a href="#aboutProject">
-              <button className="promo__navigation_button promo_aboutProject" type='button'>О проекте</button>
-            </a>
+          <li className="promo__navigation_item">
+            <Link to="aboutProject" smooth={true}>
+              <button className="promo__navigation_button promo_aboutProject" type="button">О проекте</button>
+            </Link>
           </li>
-          <li className='promo__navigation_item'>
-            <a href="#tech">
-              <button className="promo__navigation_button promo__techs" type='button'>Технологии</button>
-            </a>
+          <li className="promo__navigation_item">
+            <Link to="tech" smooth={true}>
+              <button className="promo__navigation_button promo__techs" type="button">Технологии</button>
+            </Link>
           </li>
-          <li className='promo__navigation_item'>
-            <a href="#aboutMe">
-              <button className="promo__navigation_button promo_aboutme" type='button'>Студент</button>
-            </a>
+          <li className="promo__navigation_item">
+            <Link to="aboutMe" smooth={true}>
+              <button className="promo__navigation_button promo_aboutme" type="button">Студент</button>
+            </Link>
           </li>
         </ul>
       </nav>
     </section>
-  )
-};
+  );
+}
 
 export default Promo;

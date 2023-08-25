@@ -1,56 +1,36 @@
 import React from 'react';
 import './SearchForm.css';
-import { useLocation } from 'react-router-dom';
 
-function SearchForm({ onSearchMovies, onSearchSavedMovies, setErrorMessage, updateIsShortMovie }) {
-  
-  const location = useLocation();
-  const pathname = location.pathname;
-  
-  const [name, setName] = React.useState('');
-  const [error, setError] = React.useState('');
-  const [isShortMovies, setShortMovies] = React.useState(false);
+function SearchForm({ query, onSearchMovies, onChange, onCheckboxChange, isSearching }) {
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    onSearchMovies(query);
+  };
 
-  const handleChange = (e) => {
-    setName(e.target.value);
-    setError('');
-  }
-
-  const handleSubmit =  (e) => {
-    e.preventDefault();
-    if (name.trim() === '') {
-      setError('Нужно ввести ключевое слово');
-      setErrorMessage('');
-    } else {
-      setError('');
-      if (pathname === '/movies') {
-        onSearchMovies(name, isShortMovies);
-      }else{
-        onSearchSavedMovies(name, isShortMovies);
-      }      
-     }
-  }
-
-
-  const handleCheckboxChange = (e) => {
-    setShortMovies(e.target.checked);
-    updateIsShortMovie(e.target.checked)
-  }
-  return (
-    <section className='searchform'>
-      <form className='searchform__block' onSubmit={handleSubmit} noValidate>
-        <input className='searchform__input' placeholder="Фильм" type="text" required value={name} onChange={handleChange} />
-        <button className='searchform__button' type="submit" >Найти</button>
-        {error && <p className="searchform__error">{error}</p>}
-        <section className="filtercheckbox">
-          <input type="checkbox" id="toggle" className="filtercheckbox__input" checked={isShortMovies} onChange={handleCheckboxChange} />
-          <label htmlFor="toggle" className="filtercheckbox__label"></label>
-          <span className="filtercheckbox__text">Короткометражки</span>
-        </section>
-      </form>
-      <div className='searchform__line' />
-    </section>
-  )
-};
+  return (<section className="searchform">
+    <form className="searchform__block" onSubmit={handleSubmit} noValidate>
+      <input className="searchform__input"
+             placeholder="Фильм"
+             type="text"
+             required
+             value={query.string ?? ''}
+             onChange={onChange}
+      />
+      <button className="searchform__button" type="submit" disabled={isSearching}>Найти</button>
+      {/*{error && <p className="searchform__error">{error}</p>}*/}
+      <section className="filtercheckbox">
+        <input type="checkbox"
+               id="toggle"
+               className="filtercheckbox__input"
+               checked={query.isShort}
+               onChange={onCheckboxChange}
+        />
+        <label htmlFor="toggle" className="filtercheckbox__label"/>
+        <span className="filtercheckbox__text">Короткометражки</span>
+      </section>
+    </form>
+    <div className="searchform__line"/>
+  </section>);
+}
 
 export default SearchForm;

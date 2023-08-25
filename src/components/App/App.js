@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import "./App.css";
+import './App.css';
 import { CurrentUserContext } from '../../context/CurrentUserContext';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -14,180 +14,209 @@ import Error from '../Error/Error';
 import { api } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
-
-
+import { LOCAL_STORAGE, NAVIGATOR, POPUP_MESSAGES, SCREEN } from '../../utils/vars';
+import { ScreenTypeContext } from '../../context/ScreenTypeContext';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 function App() {
-  const [movies, setMovies] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [savedMovies, setSavedMovies] = React.useState([]);
-
+  const [ movies, setMovies ] = React.useState([]);
+  const [ isLoading, setIsLoading ] = React.useState(false);
+  const [ loggedIn, setLoggedIn ] = React.useState(LOCAL_STORAGE.JWT in localStorage);
+  const [ currentUser, setCurrentUser ] = React.useState({});
+  const [ savedMovies, setSavedMovies ] = React.useState([]);
+  const [ infoPopup, setInfoPopup ] = React.useState({
+    isOpened: false,
+    isError: false,
+    message: '',
+  });
+  const [ screenType, setScreenType ] = React.useState(SCREEN.desktop.type);
+  const screenTypeDebounce = React.useRef(null);
 
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    const handleChangeScreenType = () => {
+      clearTimeout(screenTypeDebounce.current);
+      screenTypeDebounce.current = setTimeout(() => {
+        if (window.innerWidth > SCREEN.tablet.width) {
+          setScreenType(SCREEN.desktop.type);
+        } else if (window.innerWidth > SCREEN.mobile.width) {
+          setScreenType(SCREEN.tablet.type);
+        } else {
+          setScreenType(SCREEN.mobile.type);
+        }
+      }, 100);
+    };
+
+    handleChangeScreenType();
+
+    window.addEventListener('resize', handleChangeScreenType);
+
+    return () => {
+      clearTimeout(screenTypeDebounce.current);
+      window.removeEventListener('resize', handleChangeScreenType);
+    };
+
+  }, [ screenType ]);
+
+  const handleClosePopup = () => {
+    setInfoPopup((popup) => ({ ...popup, isError: false, isOpened: false }));
+  };
+
+  const handleErrorViaPopup = (message) => {
+    setInfoPopup({
+      message: message,
+      isError: true,
+      isOpened: true,
+    });
+  };
+
+  const handleSuccessViaPopup = (message) => {
+    setInfoPopup({
+      message: message,
+      isError: false,
+      isOpened: true,
+    });
+  };
+
   const handleLogin = ({ email, password }) => {
+    setIsLoading(true);
     mainApi
       .authorize(email, password)
-      .then((data) => {
-        if (data.data.jwt) {
-          localStorage.setItem('jwt', data.data.jwt);
-          setLoggedIn(true);
-          localStorage.setItem('email', email);
-          setCurrentUser(data.data);
-          navigate('/movies');
-        } else {
-          // Токен отсутствует, перенаправляем пользователя на страницу входа
-          console.log('Необходима повторная авторизация');
-          navigate('/signin');
-          console.log('JWT not found in cookies');
-        }
+      .then((res) => {
+        localStorage.setItem(LOCAL_STORAGE.JWT, res.data['jwt']);
+        setLoggedIn(true);
+        navigate(NAVIGATOR.MOVIES);
       })
       .catch((err) => {
-        console.log('Что-то пошло не так! Попробуйте ещё раз');
+        handleErrorViaPopup(err);
         console.error(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleRegister = ({ name, email, password }) => {
+    setIsLoading(true);
     mainApi
       .register(name, email, password)
-      .then((data) => {
+      .then(() => {
         handleLogin({ email, password });
-        navigate('/movies', { replace: true });
-
+        navigate(NAVIGATOR.MOVIES, { replace: true });
+        handleSuccessViaPopup(POPUP_MESSAGES.SUCCESS_REGISTRATION);
       })
       .catch((error) => {
-        console.error('Ошибка при регистрации:', error);
+        console.error(error);
         // Обработка ошибки регистрации
-      });
+        handleErrorViaPopup(error);
+      })
+      .finally(() => setIsLoading(false));
   };
 
- 
-
   const handleUpdateUser = (data) => {
+    setIsLoading(true);
     mainApi.updateUser(data)
       .then((newUser) => {
         setCurrentUser(newUser);
+        handleSuccessViaPopup(POPUP_MESSAGES.SUCCESS_PROFILE_UPDATE);
       })
       .catch((err) => {
         console.error(err);
-      });
-  }
-
-  const handleSaveMovies = (movie, isLike) => {
-    const jwt = localStorage.getItem('jwt');
-    mainApi.savedMovies(movie, jwt)
-      .then((data) => {
-        // console.log(isLike)
-        const updatedMovies = savedMovies.map((m) =>
-          m.id === movie.id ? { ...m, isSaved: true, isLike: isLike } : m
-        );
-        setSavedMovies(updatedMovies);
-        // setSavedMovies(data);
-        getSavedMovies(jwt,);
+        handleErrorViaPopup(err);
       })
-      .catch((err) => {
-        console.error(err);
-      }
-      )
-  }
+      .finally(() => setIsLoading(false));
+  };
 
-  const getSavedMovies = (jwt, isLike) => {
-    mainApi.getSavedMovies(jwt, isLike)
-      .then((data) => {
-        const filteredMoviesData = data.filter((movieItem) => movieItem.userId === jwt.userId);
-        // console.log("filteredMoviesData:", filteredMoviesData);
-        setSavedMovies(filteredMoviesData);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-  }
+  const handleSaveMovies = (movie) => {
+    mainApi.savedMovies(movie)
+      .then((m) => setSavedMovies([ ...savedMovies, m ]))
+      .catch(console.error);
+  };
 
-   const handleDelete = (movie) => {
-    // console.log('movie:', movie)
-    // console.log('movie.id:', movie._id)
-
-    mainApi.deleteMovies(movie._id)
+  const handleDelete = (id) => {
+    mainApi.deleteMovies(id)
       .then(() => {
-        setSavedMovies(savedMovies.filter(item => item._id !== movie._id));
+        setSavedMovies(savedMovies.filter(item => item._id !== id));
       })
-      .catch((err) => {
-        console.error(err);
-      })
-  }
+      .catch(console.error);
+  };
 
-  
   React.useEffect(() => {
-    //проверка наличия токена
-    const jwt = localStorage.getItem('jwt');
-    mainApi.getContent(jwt)
-      .then(() => {
-        setLoggedIn(true);
-      })
-      .catch((err) => {
-        setLoggedIn(false);
-
-        console.error(err);
-      });
-
-    setIsLoading(true);
-    Promise.all([mainApi.getInfoUser(), api.getMovies()])
-      .then(([userData, moviesData]) => {
-        localStorage.setItem('user', JSON.stringify(userData));
-        setCurrentUser(userData.user);
-        setMovies(moviesData);
-        setIsLoading(false);
-
-      })
-  }, []);
+    if (loggedIn) {
+      setIsLoading(true);
+      Promise.all([ mainApi.getInfoUser(), api.getMovies(), mainApi.getSavedMovies() ])
+        .then(([ userData, moviesData, savedMoviesData ]) => {
+          localStorage.setItem('user', JSON.stringify(userData.user));
+          setCurrentUser(userData.user);
+          setMovies(moviesData);
+          setSavedMovies(savedMoviesData);
+        })
+        .catch((err) => {
+          console.error(err);
+          setLoggedIn(false);
+          setCurrentUser({});
+          navigate(NAVIGATOR.MAIN);
+        })
+        .finally(() => setIsLoading(false));
+    }
+  }, [ loggedIn ]);
 
   const handleSignOut = () => {
     mainApi.signout()
       .then(() => {
         setLoggedIn(false);
-        navigate('/', { replace: true });
-        localStorage.removeItem('jwt');
-        localStorage.removeItem('searchQuery');
-        localStorage.removeItem('isShortMovie');
-        localStorage.removeItem('searchResults');
-        localStorage.removeItem('email');
-        localStorage.removeItem('user');
-      
+        navigate(NAVIGATOR.MAIN, { replace: true });
+        localStorage.clear();
       })
       .catch(console.error);
   };
-  
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Main loggedIn={loggedIn} />} />
-          {loggedIn && <Route path="/movies" element={<ProtectedRouteElement element={Movies}
-            movies={movies}
-            isLoading={isLoading}
-            loggedIn={loggedIn}
-            onSaved={handleSaveMovies}
-          />} />}
-          {loggedIn && <Route path="/saved-movies" element={<ProtectedRouteElement element={SavedMovies}
-            movies={movies}
-            isLoading={isLoading}
-            loggedIn={loggedIn}
-            onDelete={handleDelete}
-            getSavedMovies={getSavedMovies}
-            savedMovies={savedMovies}
-          />} />}
-          {loggedIn && <Route path="/profile" element={<ProtectedRouteElement element={Profile}
-            onUpdateUser={handleUpdateUser}
-            loggedIn={loggedIn}
-            signOut={handleSignOut} />} />}
-          <Route path="/signup" element={<Register onRegister={handleRegister} />} />
-          <Route path="/signin" element={<Login onLogin={handleLogin} />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </div>
+      <ScreenTypeContext.Provider value={screenType}>
+        <div className="App">
+          <InfoTooltip isOpen={infoPopup.isOpened} onClose={handleClosePopup} infoPopup={infoPopup}/>
+          <Routes>
+            <Route path={NAVIGATOR.MAIN}
+                   element={<Main loggedIn={loggedIn}/>}
+            />
+            {loggedIn && <Route path={NAVIGATOR.MOVIES} element={
+              <ProtectedRouteElement element={Movies}
+                                     movies={movies}
+                                     savedMovies={savedMovies}
+                                     isLoading={isLoading}
+                                     loggedIn={loggedIn}
+                                     handleError={handleErrorViaPopup}
+                                     onSaved={handleSaveMovies}
+              />}
+            />}
+            {loggedIn && <Route path={NAVIGATOR.SAVED_MOVIES} element={
+              <ProtectedRouteElement element={SavedMovies}
+                                     movies={savedMovies}
+                                     savedMovies={savedMovies}
+                                     isLoading={isLoading}
+                                     loggedIn={loggedIn}
+                                     handleError={handleErrorViaPopup}
+                                     onDelete={handleDelete}
+              />}
+            />}
+            {loggedIn && <Route path={NAVIGATOR.PROFILE} element={
+              <ProtectedRouteElement element={Profile}
+                                     onUpdateUser={handleUpdateUser}
+                                     loggedIn={loggedIn}
+                                     isLoading={isLoading}
+                                     signOut={handleSignOut}
+              />}
+            />}
+            <Route path={NAVIGATOR.SIGNUP}
+                   element={<Register onRegister={handleRegister} isLoading={isLoading} loggedIn={loggedIn}/>}
+            />
+            <Route path={NAVIGATOR.SIGNIN}
+                   element={<Login onLogin={handleLogin} isLoading={isLoading} loggedIn={loggedIn}/>}
+            />
+            <Route path={NAVIGATOR.ANY} element={<Error/>}/>
+          </Routes>
+        </div>
+      </ScreenTypeContext.Provider>
     </CurrentUserContext.Provider>
   );
 }

@@ -4,80 +4,51 @@ import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
+import { useMovieSearch } from '../../hooks/useMovieSearch';
 
 
-function Movies({ movies, isLoading, onSaved }) {
-  const [search, setSearch] = React.useState([]);
-  const [errorMessage, setErrorMessage] = React.useState('');
-  const [isShortMovies, setShortMovies] = React.useState(false);
-
-  function searchMovies(query, isShortMovie) {
-    setErrorMessage('');
-    const results = movies.filter(movie => movie.nameRU.toLowerCase().includes(query.toLowerCase()));
-    if (results.length === 0) {
-      setErrorMessage('Ничего не найдено')
-    }
-    setSearch(results);
-
-   localStorage.setItem('searchQuery', query);
-    localStorage.setItem('isShortMovie', isShortMovie);
-    localStorage.setItem('searchResults', JSON.stringify(results));
-
-    console.log('query:', query);
-    console.log('isShortMovie:', isShortMovie);
-    console.log('results:', results);   
-
-  };
-
-  function updateIsShortMovie(value) {
-    setShortMovies(value)
-  };
-
-  React.useEffect(() => {
-   
-   const searchQuery = localStorage.getItem('searchQuery');    
-    const isShortMovie = localStorage.getItem('isShortMovie');
-    const searchResults = JSON.parse(localStorage.getItem('searchResults')); 
-
-    console.log('searchQuery:', searchQuery);
-    console.log('isShortMovie:', isShortMovie);
-    console.log('searchResults:', searchResults);
-
-    if (searchQuery && isShortMovie && searchResults) {
-      setSearch(searchResults);
-      setShortMovies(isShortMovie);
-    }
-  }, []);
-  
-  React.useEffect(() => {
-    if (localStorage.getItem('shortMovies') === 'true') {
-      setShortMovies(true);
-    } else {
-      setShortMovies(false);
-    }
-  }, []);
+function Movies({ movies, savedMovies, isLoading, onSaved, handleError }) {
+  const {
+    query,
+    filteredMovies,
+    message,
+    isSearching,
+    page,
+    handleChangePage,
+    handleChange,
+    handleCheckboxChange,
+    handleSearch
+  } = useMovieSearch({
+    movies,
+    isBeatMoviesPage: true,
+    handleError,
+  });
 
   return (
-    <section className='movies'>
-      <Header />
+    <>
+      <Header/>
       <main>
         <SearchForm
-          onSearchMovies={searchMovies}
-          setErrorMessage={setErrorMessage}
-          updateIsShortMovie={updateIsShortMovie}
-
+          query={query}
+          onSearchMovies={handleSearch}
+          onChange={handleChange}
+          onCheckboxChange={handleCheckboxChange}
+          isSearching={isSearching}
         />
-        <span className="movies__error">{errorMessage}</span>
-
+        {!isLoading && !isSearching && <span className="movies__error">{message}</span>}
         <MoviesCardList
           isLoading={isLoading}
-          movies={search}
-          isShortMovies={isShortMovies}
-          onSaved={onSaved} />
+          isSearching={isSearching}
+          movies={filteredMovies}
+          savedMovies={savedMovies}
+          page={page}
+          onChangePage={handleChangePage}
+          onSaved={onSaved}
+        />
       </main>
-      <Footer />
-    </section>
-  )
-};
+      <Footer/>
+    </>
+  );
+}
 
 export default Movies;

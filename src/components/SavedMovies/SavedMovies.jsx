@@ -1,64 +1,52 @@
-// 
-
 import React from 'react';
-import "./SavedMovies.css";
+import './SavedMovies.css';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
+import { useMovieSearch } from '../../hooks/useMovieSearch';
 
-function SavedMovies({ isLoading, onDelete, getSavedMovies, savedMovies }) {
- 
-  const [errorMessage, setErrorMessage] = React.useState('');
-  const [searchSaveMovies, setSearchSaveMovies] = React.useState([]);
-  const [displayedMovies, setDisplayedMovies] = React.useState([]);
-  const [isShortMovies, setShortMovies] = React.useState(false);
-
-
-  function searchFilteredMovies(query) {
-    setErrorMessage('');
-    const results = savedMovies.filter(movie => movie.nameRU.toLowerCase().includes(query.toLowerCase()));
-    if (results.length === 0) {
-      setErrorMessage('Ничего не найдено');
-    }
-    setSearchSaveMovies(results);
-  };
-  
-  function updateIsShortMovie(value) {
-    setShortMovies(value)
-  };
-
-  React.useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    getSavedMovies(jwt);
-  }, []);
-
-  React.useEffect(() => {
-    const displayedMovies = searchSaveMovies.length > 0 ? searchSaveMovies : savedMovies;
-    setDisplayedMovies(displayedMovies);
-  }, [searchSaveMovies, savedMovies]);
+function SavedMovies({ isLoading, onDelete, movies }) {
+  const {
+    query,
+    filteredMovies,
+    message,
+    isSearching,
+    page,
+    handleChangePage,
+    handleChange,
+    handleCheckboxChange,
+    handleSearch
+  } = useMovieSearch({
+    movies,
+    isSavedMoviesPage: true,
+  });
 
   return (
     <>
-      <Header />
+      <Header/>
       <main>
         <SearchForm
-          setErrorMessage={setErrorMessage}
-          onSearchSavedMovies={searchFilteredMovies}
-          updateIsShortMovie = {updateIsShortMovie}
+          query={query}
+          onSearchMovies={handleSearch}
+          onChange={handleChange}
+          onCheckboxChange={handleCheckboxChange}
+          isSearching={isSearching}
         />
-        <span className="movies__error">{errorMessage}</span>
+        {!isLoading && !isSearching && <span className="movies__error">{message}</span>}
         <MoviesCardList
           isLoading={isLoading}
+          isSearching={isSearching}
           onDelete={onDelete}
-          movies={displayedMovies}
-          isShortMovies={isShortMovies}          
+          movies={filteredMovies}
+          page={page}
+          onChangePage={handleChangePage}
         />
-        <div className='empty'></div>
+        <div className="empty"></div>
       </main>
-      <Footer />
+      <Footer/>
     </>
-  )
-};
+  );
+}
 
 export default SavedMovies;

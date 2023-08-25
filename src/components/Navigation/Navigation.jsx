@@ -1,20 +1,19 @@
 import React from 'react';
-import "./Navigation.css";
+import './Navigation.css';
 import { NavLink } from 'react-router-dom';
 
 function Navigation() {
 
   const isActive = (match) => {
-        if (match.isActive) {
-      return "navigation__movies active navigation__movies_active";
+    if (match.isActive) {
+      return 'navigation__movies active navigation__movies_active';
     } else {
-      return "navigation__movies";
+      return 'navigation__movies';
     }
   };
 
-  
   return (
-    <section className='navigation'>
+    <section className="navigation">
       <nav>
         <NavLink
           className={isActive} to="/movies"
@@ -23,8 +22,8 @@ function Navigation() {
         >Сохранённые фильмы</NavLink>
       </nav>
     </section>
-  )
-};
+  );
+}
 
 export default Navigation;
 

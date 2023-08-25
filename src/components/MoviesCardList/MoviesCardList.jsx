@@ -1,86 +1,64 @@
-import React from 'react';
-import "./MoviesCardList.css";
+import React, { useContext, useEffect, useState } from 'react';
+import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useLocation } from 'react-router-dom';
-
-
 import Preloader from '../Preloader/Preloader';
+import { ScreenTypeContext } from '../../context/ScreenTypeContext';
+import { NAVIGATOR, PAGINATION } from '../../utils/vars';
 
-function MoviesCardList({ movies, isLoading, isShortMovies, onSaved, onDelete, searchSaveMovies }) {
-  const location = useLocation();
-  const pathname = location.pathname;
+function MoviesCardList({ movies, savedMovies, isLoading, isSearching, page, onChangePage, onSaved, onDelete }) {
+  const { pathname } = useLocation();
+  const screenType = useContext(ScreenTypeContext);
+  const [ toSlice, setToSlice ] = useState(12);
+  const [ showButton, setShowButton ] = useState(false);
 
-  // const [showMore, setShowMore] = React.useState(false);
-  const [openedMovies, setOpenedMovies] = React.useState(movies.slice(0, sliceValue(pathname)));
-  
-  function sliceValue(pathname) {
-    if (pathname === '/movies') {
-      return 7;
-    } else if (pathname === '/saved-movies') {
-      return 3;
+  useEffect(() => {
+    movies.length > toSlice
+      ? setShowButton(true)
+      : setShowButton(false);
+
+    setToSlice(PAGINATION[screenType].firstRender + PAGINATION[screenType].more * page);
+  }, [ movies, toSlice, page, screenType ]);
+
+  const isLiked = (m) => {
+    return savedMovies.reduce((result, movie) => {
+      if (m.id === Number(movie.movieId)) {
+        m._id = movie._id;
+        return true;
+      }
+      return result;
+    }, false);
+  };
+
+  const renderMovies = () => {
+    if (movies.length > 0) {
+      if (pathname === NAVIGATOR.MOVIES) {
+        return movies.slice(0, toSlice).map((movie) =>
+          <MoviesCard key={movie.id} movie={movie} onSaved={onSaved} isLiked={isLiked(movie)} onDelete={onDelete}/>);
+      } else {
+        return movies.map((movie) => <MoviesCard key={movie._id} movie={movie} onDelete={onDelete}/>);
+      }
     }
-  }
-
-React.useEffect(() => {
-  setOpenedMovies(movies.slice(0, sliceValue(pathname)));
-  // console.log( filteredMovies , ' filteredMovies ');
-  //  console.log( onSaved , 'onSaved ');
-
-}, [pathname, movies]);
-
-  // console.log('isShortMovies in MoviesCardList:', isShortMovies);
-
-  // function handleShowMore() {
-  //   setOpenedMovies(movies.slice(0, openedMovies.length + 2));   
-  // };
-
-  React.useEffect(() => {
-    setOpenedMovies(movies.slice(0, sliceValue()));
-    if (movies.length > 7 && pathname === '/movies') {
-      // setShowMore(true)
-    } else {
-      // setShowMore(false)
-    }
-  }, [movies, pathname]);
-
-// Фильтрация фильмов
-
-React.useEffect(() => {
-  if (isShortMovies) {      
-    const filteredMovies = movies.filter(movie => movie.duration <= 40);
-    setOpenedMovies(filteredMovies.slice(0, sliceValue()));
-    if (filteredMovies.length > 7 && pathname === '/movies') {
-      // setShowMore(true)
-    } else {
-      // setShowMore(false)
-    }
-  } else {
-    setOpenedMovies(movies.slice(0, sliceValue()));
-    if (movies.length > 7 && pathname === '/movies') {
-      // setShowMore(true)
-    } else {
-      // setShowMore(false)
-    }
-  }
-}, [isShortMovies, movies, pathname]);
+  };
 
   return (
-    <section className='movies'>
-      {isLoading ? (
-        <Preloader />
+    <section className="movies">
+      {(isLoading || isSearching) ? (
+        <Preloader/>
       ) : (
         <>
-          {openedMovies.map((movie) =>
-            <MoviesCard key={movie.id ? movie.id : movie._id} movie={movie} onSaved={onSaved} onDelete={onDelete}/>)}
-          {/* {showMore && openedMovies.length < movies.length &&
-            <button className="list__button" type='button' 
-            // onClick={handleShowMore}
-            >Ещё</button>} */}
+          {renderMovies()}
+          {showButton && <button className="list__button"
+                                 type="button"
+                                 onClick={onChangePage}
+          >
+            Ещё
+          </button>}
         </>
       )
       }
     </section>
-  )
-};
+  );
+}
 
 export default MoviesCardList;

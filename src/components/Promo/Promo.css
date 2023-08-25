@@ -5,14 +5,14 @@
   padding-top: 160px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .promo {
     padding-top: 352px;
     margin: 33px 20px 0 20px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .promo {
     margin: 30px 14px 0 14px;
     padding-top: 219px;
@@ -33,7 +33,7 @@
   margin: 0 auto;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .promo__header {
     font-size: 40px;
     line-height: 52px;
@@ -43,7 +43,7 @@
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .promo__header {
     font-size: 29px;
     line-height: 37px;
@@ -62,14 +62,14 @@
   padding-left: 0;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .promo__navigation {
     margin-top: 315px;
 
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .promo__navigation {
     margin-top: 212px;
     padding-bottom: 17px;
@@ -85,7 +85,7 @@
   margin-right: 10px;
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .promo__techs {
     margin-left: 6px;
     margin-right: 6px;
@@ -108,7 +108,7 @@
 
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .promo__navigation_button {
     font-size: 10px;
     line-height: 16px;

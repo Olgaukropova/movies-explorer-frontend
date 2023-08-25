@@ -2,7 +2,7 @@
   display: none;
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu {
     display: none;
     position: relative;
@@ -15,9 +15,8 @@
   }
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu__button-delete {
-    margin: 0;
     border: 0;
     padding: 5px;
     background-color: #202020;
@@ -27,19 +26,18 @@
     background-repeat: no-repeat;
     background-position: center;
     align-self: flex-end;
-    margin-top: 22px;
-    margin-right: 22px;
+    margin: 22px 22px 0 0;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .menu__button-delete {
     margin-top: 15px;
     margin-right: 15px;
   }
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu__nav {
     display: flex;
     flex-direction: column;
@@ -54,31 +52,31 @@
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .menu__nav {
     width: 100%;
   }
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu__list {
     display: flex;
     flex-direction: column;
     list-style: none;
     align-items: center;
-    margin: 0;
     padding: 0;
-    margin-top: 5px;
+    margin: 5px 0 0;
+    height: 100%;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .menu__list {
     margin-top: 102px;
   }
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu__list_main {
     margin-top: 105px;
     margin-bottom: 28px;
@@ -92,32 +90,32 @@
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .menu__list_main {
     margin-top: 0;
     margin-bottom: 24px;
   }
 }
 
-@media (max-width:800px) {
-.menu__list_main-link{
-  text-decoration: none;
-  color: #FFF;
-  text-align: center;
-  font-family: 'Inter', 'Arial', sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  cursor: pointer;
-}
+@media (max-width: 800px) {
+  .menu__list_main-link {
+    text-decoration: none;
+    color: #FFF;
+    text-align: center;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+  }
 }
 
-.menu__list_main-link:hover{
+.menu__list_main-link:hover {
   opacity: 0.7;
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu__list_mov {
     color: #FFF;
     text-align: center;
@@ -132,9 +130,8 @@
   }
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu__list_page {
-    margin-top: 628px;
     color: #FFF;
     text-align: center;
     font-family: 'Inter', 'Arial', sans-serif;
@@ -142,7 +139,8 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-top: 594px;
+    margin-top: auto;
+    margin-bottom: 85px;
   }
 }
 
@@ -150,13 +148,7 @@
   opacity: 0.7;
 }
 
-@media (max-width:550px) {
-  .menu__list_page {
-    margin-top: 421px;
-  }
-}
-
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu__list_mov_movies {
     margin-bottom: 22px;
     text-decoration: none;
@@ -171,11 +163,11 @@
   }
 }
 
-.menu__list_mov_movies:hover{
-opacity: 0.7;
+.menu__list_mov_movies:hover {
+  opacity: 0.7;
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu__list_mov_movies_active {
     border-bottom: 2px solid #FFF;
     margin-bottom: 22px;
@@ -191,20 +183,21 @@ opacity: 0.7;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .menu__list_mov_movies {
     margin-bottom: 15px;
     padding-bottom: 7px;
   }
 }
-@media (max-width:550px) {
+
+@media (max-width: 550px) {
   .menu__list_mov_movies_active {
     margin-bottom: 15px;
     padding-bottom: 7px;
   }
 }
 
-@media (max-width:800px) {
+@media (max-width: 800px) {
   .menu__list_mov__saved {
     color: #FFF;
     text-align: center;
@@ -217,12 +210,11 @@ opacity: 0.7;
   }
 }
 
-
-.menu__list_mov__saved:hover{
+.menu__list_mov__saved:hover {
   opacity: 0.7;
-  }
-  
-@media (max-width:800px) {
+}
+
+@media (max-width: 800px) {
   .menu__list_mov__saved_active {
     border-bottom: 2px solid #FFF;
     color: #FFF;
@@ -235,7 +227,8 @@ opacity: 0.7;
     text-decoration: none;
   }
 }
-.burger_opened{
+
+.burger_opened {
   display: flex;
   opacity: 1;
 }

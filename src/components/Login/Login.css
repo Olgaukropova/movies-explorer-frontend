@@ -2,17 +2,16 @@
   max-width: 396px;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  margin-top: 70px;
+  margin: 70px auto 0;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .login {
     margin-top: 233px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .login {
     margin-top: 56px;
     align-items: center;
@@ -39,7 +38,6 @@
 }
 
 .form__header {
-  margin: 0;
   padding: 0;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
@@ -47,11 +45,10 @@
   font-size: 24px;
   line-height: normal;
   color: #FFFFFF;
-  margin-top: 36px;
-  margin-bottom: 20px;
+  margin: 36px 0 20px;
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .form__header {
     margin-top: 47px;
     margin-bottom: 60px;
@@ -60,7 +57,6 @@
 }
 
 .form__input {
-  padding: 0;
   border: none;
   outline: none;
   font-family: 'Inter', 'Arial', sans-serif;
@@ -74,8 +70,7 @@
   margin-top: 10px;
   background-color: #2F2F2F;
   border-radius: 8px;
-  padding-left: 15px;
-  outline: none;
+  padding: 0 0 0 15px;
 }
 
 .form__input:focus {
@@ -96,21 +91,37 @@
   border: 0;
   border-radius: 3px;
   background-color: #4285F4;
-
 }
+
+.form__button_disabled {
+  margin-top: 0;
+  min-height: 45px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  text-align: center;
+  color: #C2C2C2;
+  border: 0;
+  border-radius: 3px;
+  background-color: #F8F8F8;
+  cursor: not-allowed;
+}
+
 
 .form__button:hover {
   cursor: pointer;
   opacity: 0.8;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .form__button {
     margin-top: 176px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .form__button {
     margin-top: 265px;
     font-size: 12px;
@@ -118,8 +129,7 @@
 }
 
 .form__text {
-  margin: 0;
-  margin-top: 16px;
+  margin: 16px 0 0;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -129,7 +139,7 @@
   color: #8B8B8B;
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .form__text {
     font-size: 12px;
     margin-top: 14px;
@@ -156,5 +166,5 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-top: 20px;
+  margin-top: 7px;
 }

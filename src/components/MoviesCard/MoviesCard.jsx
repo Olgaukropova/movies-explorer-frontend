@@ -1,54 +1,53 @@
 import React from 'react';
-import "./MoviesCard.css";
+import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
+import { NAVIGATOR } from '../../utils/vars';
 
 
-function MoviesCard({ movie, onSaved, onDelete }) {
-  const location = useLocation();
-  const pathname = location.pathname;
-
-const [isLike, setIsLike] = React.useState(movie.isLike);
+function MoviesCard({ movie, onSaved, isLiked, onDelete }) {
+  const { pathname } = useLocation();
 
   function formatDuration(duration) {
     const hours = Math.floor(duration / 60);
     const minutes = duration % 60;
 
-    return `${hours}ч ${minutes}мин`;
+    return hours > 0 ? `${hours}ч ${minutes}мин` : `${minutes}мин`;
   }
 
   function onLike(movie) {
-    // console.log('onLike movie:', movie);
-    setIsLike(!isLike);
-        onSaved(movie, !isLike);
-    //  console.log('!isLike:', !isLike);
-    movie.isLike = !movie.isLike;
-    // console.log(movie)
+    onSaved(movie);
   }
 
   function onDel(movie) {
-    setIsLike(!isLike);
-    movie.isLike = !movie.isLike;
-    onDelete(movie);
+    onDelete(movie._id);
+  }
+
+  function openTrailer(link) {
+    window.open(link, '_blank');
   }
 
   return (
-    <section className='movie'>
-      <div className='movie__info'>
+    <section className="movie">
+      <div className="movie__info">
         <div>
-          <h2 className='movie__info-name'>{movie.nameRU}</h2>
-          <p className='movie__info-time'>{formatDuration(movie.duration)}</p>
+          <h2 className="movie__info-name">{movie.nameRU}</h2>
+          <p className="movie__info-time">{formatDuration(movie.duration)}</p>
         </div>
-        {(pathname === '/movies') ? (
-          <button className={isLike ? 'buttonHeartSaved_active' : 'buttonHeartSaved'} type="button" onClick={() => onLike(movie)} ></button>
+        {(pathname === NAVIGATOR.MOVIES) ? (
+          <button className={isLiked ? 'buttonHeartSaved_active' : 'buttonHeartSaved'}
+                  type="button"
+                  onClick={() => isLiked ? onDel(movie) : onLike(movie)}/>
         ) : (
-          <button className='buttonDelete' type="button" onClick={() => onDel(movie)} ></button>
+          <button className="buttonDelete" type="button" onClick={() => onDel(movie)}/>
         )}
       </div>
-      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
-        <img className='movie__img' src={pathname === '/saved-movies' ? `${movie.image}` : `https://api.nomoreparties.co/${movie.image.url}`} alt={`заставка: ${movie.nameRU}`} />
-      </a>
+      <img className="movie__img"
+           src={pathname === NAVIGATOR.SAVED_MOVIES ? `${movie.image}` : `https://api.nomoreparties.co/${movie.image.url}`}
+           alt={`заставка: ${movie.nameRU}`}
+           onClick={() => openTrailer(movie.trailerLink)}
+      />
     </section>
-  )
-};
+  );
+}
 
 export default MoviesCard;
