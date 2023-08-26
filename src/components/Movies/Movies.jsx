@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import { useMovieSearch } from '../../hooks/useMovieSearch';
 
 
-function Movies({ movies, savedMovies, isLoading, onSaved, handleError }) {
+function Movies({ movies, savedMovies, isLoading, onSaved, onDelete, handleError, reqLoadFilms, isFirstRequest }) {
   const {
     query,
     filteredMovies,
@@ -34,6 +34,9 @@ function Movies({ movies, savedMovies, isLoading, onSaved, handleError }) {
           onChange={handleChange}
           onCheckboxChange={handleCheckboxChange}
           isSearching={isSearching}
+          reqLoadFilms={reqLoadFilms}
+          isFirstRequest={isFirstRequest}
+          movies={movies}
         />
         {!isLoading && !isSearching && <span className="movies__error">{message}</span>}
         <MoviesCardList
@@ -44,6 +47,7 @@ function Movies({ movies, savedMovies, isLoading, onSaved, handleError }) {
           page={page}
           onChangePage={handleChangePage}
           onSaved={onSaved}
+          onDelete={onDelete}
         />
       </main>
       <Footer/>

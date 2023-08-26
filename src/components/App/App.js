@@ -14,7 +14,7 @@ import Error from '../Error/Error';
 import { api } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute';
-import { LOCAL_STORAGE, NAVIGATOR, POPUP_MESSAGES, SCREEN } from '../../utils/vars';
+import { AUTH_ERROR, LOCAL_STORAGE, NAVIGATOR, POPUP_MESSAGES, SCREEN } from '../../utils/vars';
 import { ScreenTypeContext } from '../../context/ScreenTypeContext';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
@@ -30,6 +30,7 @@ function App() {
     message: '',
   });
   const [ screenType, setScreenType ] = React.useState(SCREEN.desktop.type);
+  const [ isFirstRequest, setFirstRequest ] = React.useState(true);
   const screenTypeDebounce = React.useRef(null);
 
   const navigate = useNavigate();
@@ -58,6 +59,34 @@ function App() {
     };
 
   }, [ screenType ]);
+
+  const handleError = (err) => {
+    console.error(err);
+    handleErrorViaPopup(err);
+    if (err === AUTH_ERROR) {
+      localStorage.clear();
+      setLoggedIn(false);
+      setCurrentUser({});
+      navigate(NAVIGATOR.MAIN);
+    }
+  };
+
+  const getMoviesFromBeatApi = async () => {
+    if (isFirstRequest) {
+      setIsLoading(true);
+      try {
+        const moviesData = await api.getMovies();
+        setFirstRequest(false);
+        setMovies(moviesData);
+
+        return moviesData;
+      } catch (e) {
+        handleError(POPUP_MESSAGES.CONNECTION_ERROR)
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
 
   const handleClosePopup = () => {
     setInfoPopup((popup) => ({ ...popup, isError: false, isOpened: false }));
@@ -88,10 +117,7 @@ function App() {
         setLoggedIn(true);
         navigate(NAVIGATOR.MOVIES);
       })
-      .catch((err) => {
-        handleErrorViaPopup(err);
-        console.error(err);
-      })
+      .catch(handleError)
       .finally(() => setIsLoading(false));
   };
 
@@ -104,11 +130,7 @@ function App() {
         navigate(NAVIGATOR.MOVIES, { replace: true });
         handleSuccessViaPopup(POPUP_MESSAGES.SUCCESS_REGISTRATION);
       })
-      .catch((error) => {
-        console.error(error);
-        // Обработка ошибки регистрации
-        handleErrorViaPopup(error);
-      })
+      .catch(handleError)
       .finally(() => setIsLoading(false));
   };
 
@@ -119,17 +141,14 @@ function App() {
         setCurrentUser(newUser);
         handleSuccessViaPopup(POPUP_MESSAGES.SUCCESS_PROFILE_UPDATE);
       })
-      .catch((err) => {
-        console.error(err);
-        handleErrorViaPopup(err);
-      })
+      .catch(handleError)
       .finally(() => setIsLoading(false));
   };
 
   const handleSaveMovies = (movie) => {
     mainApi.savedMovies(movie)
       .then((m) => setSavedMovies([ ...savedMovies, m ]))
-      .catch(console.error);
+      .catch(handleError);
   };
 
   const handleDelete = (id) => {
@@ -137,25 +156,19 @@ function App() {
       .then(() => {
         setSavedMovies(savedMovies.filter(item => item._id !== id));
       })
-      .catch(console.error);
+      .catch(handleError);
   };
 
   React.useEffect(() => {
     if (loggedIn) {
       setIsLoading(true);
-      Promise.all([ mainApi.getInfoUser(), api.getMovies(), mainApi.getSavedMovies() ])
-        .then(([ userData, moviesData, savedMoviesData ]) => {
+      Promise.all([ mainApi.getInfoUser(), mainApi.getSavedMovies() ])
+        .then(([ userData, savedMoviesData ]) => {
           localStorage.setItem('user', JSON.stringify(userData.user));
           setCurrentUser(userData.user);
-          setMovies(moviesData);
           setSavedMovies(savedMoviesData);
         })
-        .catch((err) => {
-          console.error(err);
-          setLoggedIn(false);
-          setCurrentUser({});
-          navigate(NAVIGATOR.MAIN);
-        })
+        .catch(handleError)
         .finally(() => setIsLoading(false));
     }
   }, [ loggedIn ]);
@@ -179,17 +192,20 @@ function App() {
             <Route path={NAVIGATOR.MAIN}
                    element={<Main loggedIn={loggedIn}/>}
             />
-            {loggedIn && <Route path={NAVIGATOR.MOVIES} element={
+            <Route path={NAVIGATOR.MOVIES} element={
               <ProtectedRouteElement element={Movies}
+                                     reqLoadFilms={getMoviesFromBeatApi}
+                                     isFirstRequest={isFirstRequest}
                                      movies={movies}
                                      savedMovies={savedMovies}
                                      isLoading={isLoading}
                                      loggedIn={loggedIn}
                                      handleError={handleErrorViaPopup}
                                      onSaved={handleSaveMovies}
+                                     onDelete={handleDelete}
               />}
-            />}
-            {loggedIn && <Route path={NAVIGATOR.SAVED_MOVIES} element={
+            />
+            <Route path={NAVIGATOR.SAVED_MOVIES} element={
               <ProtectedRouteElement element={SavedMovies}
                                      movies={savedMovies}
                                      savedMovies={savedMovies}
@@ -198,15 +214,15 @@ function App() {
                                      handleError={handleErrorViaPopup}
                                      onDelete={handleDelete}
               />}
-            />}
-            {loggedIn && <Route path={NAVIGATOR.PROFILE} element={
+            />
+            <Route path={NAVIGATOR.PROFILE} element={
               <ProtectedRouteElement element={Profile}
                                      onUpdateUser={handleUpdateUser}
                                      loggedIn={loggedIn}
                                      isLoading={isLoading}
                                      signOut={handleSignOut}
               />}
-            />}
+            />
             <Route path={NAVIGATOR.SIGNUP}
                    element={<Register onRegister={handleRegister} isLoading={isLoading} loggedIn={loggedIn}/>}
             />

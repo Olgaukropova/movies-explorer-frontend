@@ -59,7 +59,7 @@ export const useMovieSearch = ({ movies, isBeatMoviesPage, isSavedMoviesPage, ha
     // меняем стейт запроса
     setQuery((q) => ({ ...q, isShort: evt.target.checked }));
 
-    handleSearch({ string: query.string, isShort: evt.target.checked });
+    handleSearch({ string: query.string, isShort: evt.target.checked }, movies);
   };
 
   const resetParams = () => {
@@ -67,7 +67,7 @@ export const useMovieSearch = ({ movies, isBeatMoviesPage, isSavedMoviesPage, ha
     setPage(0);
   };
 
-  const handleSearch = (query) => {
+  const handleSearch = (query, movies) => {
     if (!query.string && isBeatMoviesPage) {
       return handleError(POPUP_MESSAGES.EMPTY_INPUT_ERROR);
     }

@@ -1,10 +1,16 @@
 import React from 'react';
 import './SearchForm.css';
 
-function SearchForm({ query, onSearchMovies, onChange, onCheckboxChange, isSearching }) {
-  const handleSubmit = (evt) => {
+function SearchForm({ query, onSearchMovies, onChange, onCheckboxChange, isSearching, reqLoadFilms, isFirstRequest, movies }) {
+
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    onSearchMovies(query);
+    if (isFirstRequest) {
+      const data = await reqLoadFilms();
+      onSearchMovies(query, data);
+    } else {
+      onSearchMovies(query, movies);
+    }
   };
 
   return (<section className="searchform">

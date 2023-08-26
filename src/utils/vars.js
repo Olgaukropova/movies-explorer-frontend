@@ -19,6 +19,7 @@ const POPUP_MESSAGES = {
   SUCCESS_REGISTRATION: 'Регистрация прошла успешно, добро пожаловать!',
   SUCCESS_PROFILE_UPDATE: 'Данные обновлены успешно!',
   EMPTY_INPUT_ERROR: 'Строка поиска не должна быть пустой...',
+  CONNECTION_ERROR: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.',
 };
 
 const LOCAL_STORAGE = {
@@ -40,7 +41,7 @@ const NAVIGATOR = {
 const PAGINATION = {
   desktop: {
     firstRender: 7,
-    more: 3,
+    more: 7,
   },
   tablet: {
     firstRender: 7,
@@ -52,10 +53,16 @@ const PAGINATION = {
   }
 };
 
+const SHORT_MOVIE_DURATION = 40;
+
+const AUTH_ERROR = 'Требуется авторизация';
+
 export {
   SCREEN,
   POPUP_MESSAGES,
   LOCAL_STORAGE,
   NAVIGATOR,
   PAGINATION,
+  SHORT_MOVIE_DURATION,
+  AUTH_ERROR,
 };
