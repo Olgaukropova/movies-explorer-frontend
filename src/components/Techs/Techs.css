@@ -2,7 +2,7 @@
   border-bottom: 1px solid #DADADA;
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .techs__botom {
     border-bottom: 1px solid #000;
   }
@@ -14,13 +14,13 @@
 
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .techs {
     padding: 90px 50px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .techs {
     background-color: #202020;
     padding: 72px 18px;
@@ -28,7 +28,6 @@
 }
 
 .techs__title {
-  margin: 0;
   padding: 0;
   color: #FFF;
   font-family: 'Inter', 'Arial', sans-serif;
@@ -37,10 +36,10 @@
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.88px;
-  margin-bottom: 23px;
+  margin: 0 0 23px;
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .techs__title {
     font-size: 18px;
     letter-spacing: -0.72px;
@@ -49,7 +48,6 @@
 }
 
 .techs__header {
-  margin: 0;
   padding: 0;
   color: #FFF;
   text-align: center;
@@ -59,18 +57,18 @@
   font-weight: 400;
   line-height: 58px;
   letter-spacing: -2px;
-  margin-top: 90px;
+  margin: 90px 0 0;
 
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .techs__header {
     margin-top: 80px;
   }
 }
 
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .techs__header {
     margin-top: 49px;
     font-size: 30px;
@@ -79,7 +77,6 @@
 }
 
 .techs__subtitle {
-  margin: 0 auto;
   color: #FFF;
   text-align: center;
   font-family: 'Inter', 'Arial', sans-serif;
@@ -88,12 +85,11 @@
   font-weight: 400;
   line-height: 20px;
   letter-spacing: -0.56px;
-  margin-top: 26px;
-  margin-bottom: 100px;
+  margin: 26px auto 100px;
   max-width: 460px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .techs__subtitle {
     font-size: 12px;
     line-height: 18px;
@@ -103,14 +99,14 @@
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .techs__subtitle {
     font-size: 11px;
     line-height: 16px;
     letter-spacing: -0.44px;
     margin-top: 13px;
     margin-bottom: 50px;
-}
+  }
 }
 
 .techs__helpers {
@@ -123,14 +119,14 @@
   justify-content: center;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .techs__helpers {
     grid-template-columns:repeat(7, 84px);
     grid-template-rows: 57px;
   }
 }
 
-@media (max-width:670px) {
+@media (max-width: 670px) {
   .techs__helpers {
     grid-template-columns:repeat(2, 84px);
     grid-auto-rows: 57px;
@@ -156,7 +152,7 @@
   padding-bottom: 21px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .techs__helpers-element {
     width: 84px;
     font-size: 12px;

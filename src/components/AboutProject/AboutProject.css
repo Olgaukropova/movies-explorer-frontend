@@ -2,22 +2,20 @@
   margin: 0 70px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .aboutproject {
     margin: 0 50px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .aboutproject {
     margin: 0 18px;
   }
 }
 
 .aboutproject__title {
-  margin: 0;
-  margin-top: 110px;
-  margin-bottom: 23px;
+  margin: 110px 0 23px;
   color: #FFF;
   font-family: 'Inter', 'Arial', sans-serif;
   font-size: 22px;
@@ -27,13 +25,13 @@
   letter-spacing: -0.88px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .aboutproject__title {
     margin-top: 90px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .aboutproject__title {
     margin-top: 70px;
     margin-bottom: 28px;
@@ -47,18 +45,16 @@
 }
 
 .aboutproject__list {
-  margin: 0;
   padding: 0;
   display: grid;
-  margin-top: 70px;
   grid-template-rows: repeat(2, max-content);
   grid-template-columns: 1fr 1fr;
   row-gap: 26px;
   column-gap: 40px;
-  margin-bottom: 110px;
+  margin: 70px 0 110px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .aboutproject__list {
     row-gap: 22px;
     column-gap: 30px;
@@ -66,7 +62,7 @@
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .aboutproject__list {
     grid-template-columns: 284px;
     margin-top: 60px;
@@ -87,7 +83,7 @@
   margin: 0;
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .aboutproject__list_header {
     font-size: 18px;
     letter-spacing: -0.72px;
@@ -103,14 +99,14 @@
   margin: 0;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .aboutproject__list_description {
     font-size: 12px;
     line-height: 18px;
-      }
+  }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .aboutproject__list_description {
     font-size: 11px;
     line-height: 16px;
@@ -120,7 +116,7 @@
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .aboutproject__list_header-order {
     grid-row: 3;
   }
@@ -137,14 +133,14 @@
   row-gap: 14px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .aboutproject__list_tasks {
     grid-template-columns: 140px 1fr;
     margin-bottom: 90px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .aboutproject__list_tasks {
     margin-bottom: 70px;
     grid-template-columns: 100px 1fr;
@@ -165,14 +161,14 @@
   line-height: normal;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .aboutproject__list_tasks-time {
     font-size: 14px;
     padding: 9px 10px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .aboutproject__list_tasks-time {
     font-size: 11px;
     padding: 10px 11px;
@@ -196,13 +192,13 @@
   line-height: 17px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .aboutproject__list_tasks-step {
     font-weight: 400;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .aboutproject__list_tasks-step {
     font-size: 11px;
   }

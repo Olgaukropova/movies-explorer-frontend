@@ -2,13 +2,13 @@
   padding: 72px 70px 80px 71px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .movies {
     padding: 70px 30px 80px 30px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .movies {
     padding: 40px 10px 80px 10px;
   }
@@ -36,13 +36,13 @@
   opacity: 0.8;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .list__button {
     margin-top: 80px;
   }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
   .list__button {
     margin-top: 70px;
   }

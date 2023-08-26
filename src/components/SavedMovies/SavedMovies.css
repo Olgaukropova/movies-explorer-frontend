@@ -1,15 +1,15 @@
-.empty{
+.empty {
   padding: 35px 0;
 }
 
-@media (max-width:1000px) {
-  .empty{
+@media (max-width: 1000px) {
+  .empty {
     padding: 45px 0;
   }
 }
 
-@media (max-width:500px) {
-  .empty{
+@media (max-width: 500px) {
+  .empty {
     padding: 40px 0;
   }
 }
