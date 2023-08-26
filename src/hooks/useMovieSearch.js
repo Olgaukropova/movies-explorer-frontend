@@ -2,7 +2,14 @@ import React, { useEffect } from 'react';
 import { LOCAL_STORAGE, POPUP_MESSAGES } from '../utils/vars';
 import { filterMovies } from '../utils/searchHelper';
 
-export const useMovieSearch = ({ movies, isBeatMoviesPage, isSavedMoviesPage, handleError }) => {
+export const useMovieSearch = ({
+                                 movies,
+                                 isBeatMoviesPage,
+                                 isSavedMoviesPage,
+                                 handleError,
+                                 isFirstRequest,
+                                 reqLoadFilms
+                               }) => {
   const [ filteredMovies, setFilteredMovies ] = React.useState([]);
   const [ query, setQuery ] = React.useState({
     string: '',
@@ -43,7 +50,7 @@ export const useMovieSearch = ({ movies, isBeatMoviesPage, isSavedMoviesPage, ha
         setMessage('Сохраненных фильмов пока нет :(');
       }
     }
-  }, [ isSavedMoviesPage, movies, query ]);
+  }, [ isSavedMoviesPage, movies ]);
 
   const handleChangePage = () => setPage(p => p + 1);
 
@@ -51,7 +58,7 @@ export const useMovieSearch = ({ movies, isBeatMoviesPage, isSavedMoviesPage, ha
     setQuery((q) => ({ ...q, string: evt.target.value }));
   };
 
-  const handleCheckboxChange = (evt) => {
+  const handleCheckboxChange = async (evt) => {
     // обработка ошибки при пустом инпуте
     if (!query.string && isBeatMoviesPage) {
       return handleError(POPUP_MESSAGES.EMPTY_INPUT_ERROR);
@@ -59,7 +66,12 @@ export const useMovieSearch = ({ movies, isBeatMoviesPage, isSavedMoviesPage, ha
     // меняем стейт запроса
     setQuery((q) => ({ ...q, isShort: evt.target.checked }));
 
-    handleSearch({ string: query.string, isShort: evt.target.checked }, movies);
+    if (isFirstRequest && isBeatMoviesPage) {
+      const arr = await reqLoadFilms();
+      handleSearch({ string: query.string, isShort: evt.target.checked }, arr);
+    } else {
+      handleSearch({ string: query.string, isShort: evt.target.checked }, movies);
+    }
   };
 
   const resetParams = () => {

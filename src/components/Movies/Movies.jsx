@@ -22,6 +22,8 @@ function Movies({ movies, savedMovies, isLoading, onSaved, onDelete, handleError
     movies,
     isBeatMoviesPage: true,
     handleError,
+    isFirstRequest,
+    reqLoadFilms,
   });
 
   return (

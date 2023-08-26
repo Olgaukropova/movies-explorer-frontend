@@ -48,7 +48,7 @@ function MoviesCardList({ movies, savedMovies, isLoading, isSearching, page, onC
       ) : (
         <>
           {renderMovies()}
-          {showButton && <button className="list__button"
+          {showButton && pathname === NAVIGATOR.MOVIES && <button className="list__button"
                                  type="button"
                                  onClick={onChangePage}
           >

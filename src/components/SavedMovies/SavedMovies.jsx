@@ -20,6 +20,8 @@ function SavedMovies({ isLoading, onDelete, movies }) {
   } = useMovieSearch({
     movies,
     isSavedMoviesPage: true,
+    isFirstRequest: false,
+    isBeatMoviesPage: false,
   });
 
   return (
@@ -32,6 +34,7 @@ function SavedMovies({ isLoading, onDelete, movies }) {
           onChange={handleChange}
           onCheckboxChange={handleCheckboxChange}
           isSearching={isSearching}
+          movies={movies}
         />
         {!isLoading && !isSearching && <span className="movies__error">{message}</span>}
         <MoviesCardList

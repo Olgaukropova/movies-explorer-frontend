@@ -1,11 +1,14 @@
 import React from 'react';
 import './SearchForm.css';
+import { useLocation } from 'react-router-dom';
+import { NAVIGATOR } from '../../utils/vars';
 
 function SearchForm({ query, onSearchMovies, onChange, onCheckboxChange, isSearching, reqLoadFilms, isFirstRequest, movies }) {
+  const { pathname } = useLocation();
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    if (isFirstRequest) {
+    if (isFirstRequest && pathname === NAVIGATOR.MOVIES) {
       const data = await reqLoadFilms();
       onSearchMovies(query, data);
     } else {
